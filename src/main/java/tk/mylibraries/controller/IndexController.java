@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -24,25 +25,30 @@ public class IndexController {
 	}
 	
 	public void checkLogin() {
-		System.out.println("Email: " + email);
-		System.out.println("Password: " + password);
+		
+		FacesMessage msg = null;
 		Usuario usuario = usuarioDAO.getUsuarioByEmail(email);
 		
 		if (usuario != null) {
 			if (usuarioDAO.checkPasswordUser(usuario, password)) {
-				redirectPage(usuario);
-			}			
+				setSession(usuario);
+				redirectPage("app/main.xhtml");
+			}
 		}
+		msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "E-mail ou senha incorretos");
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 	
-	public void redirectPage(Usuario usuario) {
+	public void setSession(Usuario usuario) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getSessionMap().put("user", usuario.getUsuarioId());
+	}
+	
+	public void redirectPage(String page) {
 		
 		try {
-			
-			FacesContext context = FacesContext.getCurrentInstance();
 			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-			context.getExternalContext().getSessionMap().put("user", usuario.getUsuarioId());
-			externalContext.redirect("app/main.xhtml");			
+			externalContext.redirect(page);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

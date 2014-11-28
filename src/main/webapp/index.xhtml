@@ -9,137 +9,134 @@
 	<title>MyLibraries</title>
 </h:head>
 <h:body>
+	<p:panel id="painelPrincipal"
+		style="height: 380px; margin: 30px auto; padding: 30px; width: 670px;">
+		<h:outputText value="MyLibraries"
+			style="color: #696969; border-bottom: 1px solid #bdbdbd; border-bottom-color: rgb(189, 189, 189); border-bottom-style: solid; border-bottom-width: 1px; font-size: 36px; font-weight: normal; margin-bottom: 35px; display: block;">
+		</h:outputText>
+		<h:form>
+			<p:panel id="painelLogin"
+				style="background-color: #F5F5F5; border: 1px solid #bdbdbd; float: left; height: 265px; padding: 15px; width: 280px;">
+				<h:outputText value="Acesse sua conta"
+					style="color: #696969; font-size: 20px; font-weight: normal; display: block;">
+				</h:outputText>
+				<br></br>
+				<h:outputText value="E-mail"></h:outputText>
+				<p:inputText value="#{indexController.email}"></p:inputText>
+				<br></br>
+				<br></br>
+				<h:outputText value="Senha"></h:outputText>
+				<p:password for="pass" validatorMessage="Email incorreto."
+					required="true" value="#{indexController.password}">
+					<!-- 						<f:validateRegex pattern="^[a-zA-Z]+$" /> -->
+				</p:password>
+				<p:messages for="pass" showDetail="true" />
+				<br></br>
+				<br></br>
+				<p:commandButton value="Entrar" update="painelLogin"
+					icon="ui-icon-check" style="margin-right:10px"
+					action="#{indexController.checkLogin}" />
+				<p:growl id="msgs" showDetail="true" />
+			</p:panel>
+		</h:form>
+	</p:panel>
 
-	<h:outputText value="#{indexController.horario}"></h:outputText>
+	<!-- 	<p:panel id="mainPanel"> -->
+	<!-- 		<h:form> -->
+	<!-- 			<h:panelGrid columns="2" id="loginGrid" cellpadding="5"> -->
+	<!-- 				<h:outputLabel for="inputEmail" value="E-mail" /> -->
+	<!-- 				<p:password id="inputEmail" value="" match="inputPassword" -->
+	<!-- 					label="Error email" required="true" /> -->
 
-		<p:panel id="painelPrincipal"
-			style="height: 380px; margin: 30px auto; padding: 30px; width: 670px;">
-			<h:outputText value="MyLibraries"
-				style="color: #696969; border-bottom: 1px solid #bdbdbd; border-bottom-color: rgb(189, 189, 189); border-bottom-style: solid; border-bottom-width: 1px; font-size: 36px; font-weight: normal; margin-bottom: 35px; display: block;">
-			</h:outputText>
-			<h:form>
-				<p:panel id="painelLogin"
-					style="background-color: #F5F5F5; border: 1px solid #bdbdbd; float: left; height: 265px; padding: 15px; width: 280px;">
-					<h:outputText value="Acesse sua conta"
-						style="color: #696969; font-size: 20px; font-weight: normal; display: block;">
-					</h:outputText>
-					<br></br>
-					<h:outputText value="E-mail"></h:outputText>
-					<p:inputText value="#{indexController.email}"></p:inputText>
-					<br></br>
-					<br></br>
-					<h:outputText value="Senha"></h:outputText>
-					<p:password for="pass" 
-						validatorMessage="Email incorreto."
-						required="true" 
-						value="#{indexController.password}">
-<!-- 						<f:validateRegex pattern="^[a-zA-Z]+$" /> -->
-					</p:password>
-					<p:messages for="pass" showDetail="true" />
-					<br></br>
-					<br></br>
-					<p:commandButton value="Entrar" update="painelLogin"
-						icon="ui-icon-check" style="margin-right:10px" action="#{indexController.checkLogin}"/>
-				</p:panel>
-			</h:form>
-		</p:panel>
+	<!-- 				<h:outputLabel for="inputPassword" value="Senha" /> -->
+	<!-- 				<p:password id="inputPassword" value="" label="Error senha" -->
+	<!-- 					required="true" /> -->
+	<!-- 			</h:panelGrid> -->
 
-<!-- 	<p:panel id="mainPanel"> -->
-		<!-- 		<h:form> -->
-		<!-- 			<h:panelGrid columns="2" id="loginGrid" cellpadding="5"> -->
-		<!-- 				<h:outputLabel for="inputEmail" value="E-mail" /> -->
-		<!-- 				<p:password id="inputEmail" value="" match="inputPassword" -->
-		<!-- 					label="Error email" required="true" /> -->
+	<!-- 			<p:commandButton update="loginGrid" value="Entrar" /> -->
+	<!-- 			<p:messages id="messages" showDetail="true" autoUpdate="true"> -->
+	<!-- 			</p:messages> -->
+	<!-- 		</h:form> -->
 
-		<!-- 				<h:outputLabel for="inputPassword" value="Senha" /> -->
-		<!-- 				<p:password id="inputPassword" value="" label="Error senha" -->
-		<!-- 					required="true" /> -->
-		<!-- 			</h:panelGrid> -->
+	<!-- 		<h:form> -->
+	<!-- 			<p:panel header="Validate"> -->
+	<!-- 				<p:messages autoUpdate="true" /> -->
 
-		<!-- 			<p:commandButton update="loginGrid" value="Entrar" /> -->
-		<!-- 			<p:messages id="messages" showDetail="true" autoUpdate="true"> -->
-		<!-- 			</p:messages> -->
-		<!-- 		</h:form> -->
+	<!-- 				<h:panelGrid id="grid" columns="4" cellpadding="5"> -->
+	<!-- 					<h:outputLabel for="name" value="Name:" style="font-weight:bold" /> -->
+	<!-- 					<p:inputText id="name" value="#{indexController.text}" -->
+	<!-- 						required="true" label="Name" /> -->
+	<!-- 					<p:message for="name" /> -->
+	<!-- 					<h:outputText value="#{indexController.text}" /> -->
 
-<!-- 		<h:form> -->
-<!-- 			<p:panel header="Validate"> -->
-<!-- 				<p:messages autoUpdate="true" /> -->
+	<!-- 					<h:outputLabel for="number" value="Number:" -->
+	<!-- 						style="font-weight:bold" /> -->
+	<!-- 					<p:inputText id="number" value="#{indexController.integer}" -->
+	<!-- 						label="Number"> -->
+	<!-- 						<f:validateDoubleRange minimum="5" maximum="8" /> -->
+	<!-- 					</p:inputText> -->
+	<!-- 					<p:message for="number" /> -->
+	<!-- 					<h:outputText value="#{indexController.integer}" /> -->
 
-<!-- 				<h:panelGrid id="grid" columns="4" cellpadding="5"> -->
-<!-- 					<h:outputLabel for="name" value="Name:" style="font-weight:bold" /> -->
-<!-- 					<p:inputText id="name" value="#{indexController.text}" -->
-<!-- 						required="true" label="Name" /> -->
-<!-- 					<p:message for="name" /> -->
-<!-- 					<h:outputText value="#{indexController.text}" /> -->
+	<!-- 					<h:outputLabel for="dd" value="Double:" style="font-weight:bold" /> -->
+	<!-- 					<p:inputText id="dd" value="#{indexController.doubleNumber}" -->
+	<!-- 						converterMessage="Cannot convert to double."> -->
+	<!-- 						<f:validateDoubleRange minimum="5.5" maximum="8.5" /> -->
+	<!-- 					</p:inputText> -->
+	<!-- 					<p:message for="dd" /> -->
+	<!-- 					<h:outputText value="#{indexController.doubleNumber}" /> -->
 
-<!-- 					<h:outputLabel for="number" value="Number:" -->
-<!-- 						style="font-weight:bold" /> -->
-<!-- 					<p:inputText id="number" value="#{indexController.integer}" -->
-<!-- 						label="Number"> -->
-<!-- 						<f:validateDoubleRange minimum="5" maximum="8" /> -->
-<!-- 					</p:inputText> -->
-<!-- 					<p:message for="number" /> -->
-<!-- 					<h:outputText value="#{indexController.integer}" /> -->
+	<!-- 					<h:outputLabel for="money" value="Currency ($):" -->
+	<!-- 						style="font-weight:bold" /> -->
+	<!-- 					<p:inputText id="money" value="#{indexController.money}" -->
+	<!-- 						label="Currency"> -->
+	<!-- 						<f:convertNumber type="currency" currencySymbol="$" /> -->
+	<!-- 					</p:inputText> -->
+	<!-- 					<p:message for="money" /> -->
+	<!-- 					<h:outputText value="#{indexController.money}"> -->
+	<!-- 						<f:convertNumber type="currency" currencySymbol="$" /> -->
+	<!-- 					</h:outputText> -->
 
-<!-- 					<h:outputLabel for="dd" value="Double:" style="font-weight:bold" /> -->
-<!-- 					<p:inputText id="dd" value="#{indexController.doubleNumber}" -->
-<!-- 						converterMessage="Cannot convert to double."> -->
-<!-- 						<f:validateDoubleRange minimum="5.5" maximum="8.5" /> -->
-<!-- 					</p:inputText> -->
-<!-- 					<p:message for="dd" /> -->
-<!-- 					<h:outputText value="#{indexController.doubleNumber}" /> -->
+	<!-- 					<h:outputLabel for="regex" value="Regex (^[a-zA-Z]+$):" -->
+	<!-- 						style="font-weight:bold" /> -->
+	<!-- 					<p:inputText id="regex" value="#{indexController.regexText}" -->
+	<!-- 						validatorMessage="Value does not match pattern."> -->
+	<!-- 						<f:validateRegex pattern="^[a-zA-Z]+$" /> -->
+	<!-- 					</p:inputText> -->
+	<!-- 					<p:message for="regex" /> -->
+	<!-- 					<h:outputText value="#{indexController.regexText}" /> -->
 
-<!-- 					<h:outputLabel for="money" value="Currency ($):" -->
-<!-- 						style="font-weight:bold" /> -->
-<!-- 					<p:inputText id="money" value="#{indexController.money}" -->
-<!-- 						label="Currency"> -->
-<!-- 						<f:convertNumber type="currency" currencySymbol="$" /> -->
-<!-- 					</p:inputText> -->
-<!-- 					<p:message for="money" /> -->
-<!-- 					<h:outputText value="#{indexController.money}"> -->
-<!-- 						<f:convertNumber type="currency" currencySymbol="$" /> -->
-<!-- 					</h:outputText> -->
+	<!-- 					<h:outputLabel for="date" value="Date" style="font-weight:bold" /> -->
+	<!-- 					<p:inputText id="date" value="#{indexController.date}" label="Date"> -->
+	<!-- 						<f:convertDateTime pattern="MM/dd/yyyy" /> -->
+	<!-- 					</p:inputText> -->
+	<!-- 					<p:message for="date" /> -->
+	<!-- 					<h:outputText value="#{indexController.date}"> -->
+	<!-- 						<f:convertDateTime pattern="MM/dd/yyyy" /> -->
+	<!-- 					</h:outputText> -->
 
-<!-- 					<h:outputLabel for="regex" value="Regex (^[a-zA-Z]+$):" -->
-<!-- 						style="font-weight:bold" /> -->
-<!-- 					<p:inputText id="regex" value="#{indexController.regexText}" -->
-<!-- 						validatorMessage="Value does not match pattern."> -->
-<!-- 						<f:validateRegex pattern="^[a-zA-Z]+$" /> -->
-<!-- 					</p:inputText> -->
-<!-- 					<p:message for="regex" /> -->
-<!-- 					<h:outputText value="#{indexController.regexText}" /> -->
+	<!-- 					<h:outputLabel for="desc" value="Description" -->
+	<!-- 						style="font-weight:bold" /> -->
+	<!-- 					<p:inputTextarea id="desc" value="#{indexController.description}" -->
+	<!-- 						required="true" label="Description"> -->
+	<!-- 						<f:validateLength minimum="3" maximum="10" /> -->
+	<!-- 					</p:inputTextarea> -->
+	<!-- 					<p:message for="desc" /> -->
+	<!-- 					<h:outputText value="#{indexController.description}" /> -->
+	<!-- 				</h:panelGrid> -->
 
-<!-- 					<h:outputLabel for="date" value="Date" style="font-weight:bold" /> -->
-<!-- 					<p:inputText id="date" value="#{indexController.date}" label="Date"> -->
-<!-- 						<f:convertDateTime pattern="MM/dd/yyyy" /> -->
-<!-- 					</p:inputText> -->
-<!-- 					<p:message for="date" /> -->
-<!-- 					<h:outputText value="#{indexController.date}"> -->
-<!-- 						<f:convertDateTime pattern="MM/dd/yyyy" /> -->
-<!-- 					</h:outputText> -->
+	<!-- 				<p:commandButton value="Non-Ajax" ajax="false" icon="ui-icon-check" -->
+	<!-- 					validateClient="true" style="margin-right:10px" /> -->
+	<!-- 				<p:commandButton value="Ajax" update="grid" icon="ui-icon-check" -->
+	<!-- 					validateClient="true" style="margin-right:10px" /> -->
+	<!-- 				<p:commandButton value="Partial" update="grid" process="name number" -->
+	<!-- 					validateClient="true" icon="ui-icon-check" -->
+	<!-- 					style="margin-right:10px" /> -->
+	<!-- 				<p:commandButton value="Disabled" ajax="false" icon="ui-icon-check" /> -->
+	<!-- 			</p:panel> -->
+	<!-- 		</h:form> -->
 
-<!-- 					<h:outputLabel for="desc" value="Description" -->
-<!-- 						style="font-weight:bold" /> -->
-<!-- 					<p:inputTextarea id="desc" value="#{indexController.description}" -->
-<!-- 						required="true" label="Description"> -->
-<!-- 						<f:validateLength minimum="3" maximum="10" /> -->
-<!-- 					</p:inputTextarea> -->
-<!-- 					<p:message for="desc" /> -->
-<!-- 					<h:outputText value="#{indexController.description}" /> -->
-<!-- 				</h:panelGrid> -->
-
-<!-- 				<p:commandButton value="Non-Ajax" ajax="false" icon="ui-icon-check" -->
-<!-- 					validateClient="true" style="margin-right:10px" /> -->
-<!-- 				<p:commandButton value="Ajax" update="grid" icon="ui-icon-check" -->
-<!-- 					validateClient="true" style="margin-right:10px" /> -->
-<!-- 				<p:commandButton value="Partial" update="grid" process="name number" -->
-<!-- 					validateClient="true" icon="ui-icon-check" -->
-<!-- 					style="margin-right:10px" /> -->
-<!-- 				<p:commandButton value="Disabled" ajax="false" icon="ui-icon-check" /> -->
-<!-- 			</p:panel> -->
-<!-- 		</h:form> -->
-
-<!-- 	</p:panel> -->
+	<!-- 	</p:panel> -->
 
 </h:body>
 </html>
