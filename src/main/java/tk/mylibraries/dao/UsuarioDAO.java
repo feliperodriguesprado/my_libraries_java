@@ -34,6 +34,12 @@ public class UsuarioDAO extends GenericDAO<Usuario, Long> {
 
 	}
 	
+	/**
+	 * Método que faz select no usuário.
+	 * @param usuario
+	 * @param password
+	 * @return
+	 */
 	public boolean checkPasswordUser(Usuario usuario, String password) {
 		
 		try {
