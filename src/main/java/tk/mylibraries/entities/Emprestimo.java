@@ -15,6 +15,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 @Entity
 @Table(name = "emprestimo")
 public class Emprestimo implements Serializable {
@@ -32,11 +33,11 @@ public class Emprestimo implements Serializable {
 	private Biblioteca biblioteca;
 
 	@Column(name = "data_emprestimo", nullable = false)
-	@Temporal ( TemporalType . DATE )
+	@Temporal(TemporalType.DATE)
 	private Date dataEmprestimo;
 
 	@Column(name = "data_encerramento", nullable = false)
-	@Temporal ( TemporalType . DATE )
+	@Temporal(TemporalType.DATE)
 	private Date dataEncerramento;
 
 	@Column(name = "destinatario", nullable = false, length = 100)
@@ -103,7 +104,5 @@ public class Emprestimo implements Serializable {
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
-	
-	
 
 }
