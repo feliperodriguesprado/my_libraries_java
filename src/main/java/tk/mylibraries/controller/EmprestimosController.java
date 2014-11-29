@@ -3,11 +3,9 @@ package tk.mylibraries.controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.model.SelectItem;
-
 import tk.mylibraries.dao.BibliotecaDAO;
 import tk.mylibraries.dao.EmprestimoDAO;
 import tk.mylibraries.dao.TipoBibliotecaDAO;
@@ -23,7 +21,6 @@ import tk.mylibraries.orm.HibernateUtil;
 @ManagedBean
 @ViewScoped
 public class EmprestimosController {
-
 	Emprestimo emprestimo = new Emprestimo();
 	Biblioteca biblioteca = new Biblioteca();
 	TipoBiblioteca tipo = new TipoBiblioteca();
@@ -65,7 +62,6 @@ public class EmprestimosController {
 			List<Biblioteca> library = new EmprestimoDAO(
 					HibernateUtil.getEntityManager())
 					.getBibliotecasPeloTipo(tipo.getTipoId());
-			
 		}
 		// System.out.println("Chegou nessa bosta");
 		// List<Biblioteca> bibliotecas = new BibliotecaDAO(
@@ -111,14 +107,12 @@ public class EmprestimosController {
 	// BibliotecaDAO(HibernateUtil.getEntityManager()).getAll();
 	// return emprestimo.getBiblioteca();
 	// }
-
 	public void setDataEmprestimo(Date data_emprestimo) {
 		emprestimo.setDataEmprestimo(data_emprestimo);
 	}
 
 	public Date getDataEmprestimo() {
 		return emprestimo.getDataEmprestimo();
-
 	}
 
 	public void setDataEncerramento(Date data_encerramento) {
@@ -127,7 +121,6 @@ public class EmprestimosController {
 
 	public Date getDataEncerramento() {
 		return emprestimo.getDataEncerramento();
-
 	}
 
 	public void setDestinatario(String destinatario) {
@@ -136,7 +129,6 @@ public class EmprestimosController {
 
 	public String getDestinatario() {
 		return emprestimo.getDestinatario();
-
 	}
 
 	public void setObservacao(String observacao) {
@@ -145,7 +137,6 @@ public class EmprestimosController {
 
 	public String getObservacao() {
 		return emprestimo.getObservacao();
-
 	}
 
 	public void setAtivo(Boolean ativo) {
@@ -155,5 +146,4 @@ public class EmprestimosController {
 	public Boolean getAtivo() {
 		return emprestimo.getAtivo();
 	}
-
 }

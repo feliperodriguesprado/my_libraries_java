@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -9,32 +8,25 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Emprestimos</title>
 </h:head>
-
 <h:body>
 	<h:form>
-
 		<!-- Apresenta as bibliotecas cadastradas -->
 		<p:selectOneMenu id="lib" value="#{emprestimosController.tipo}">
-		<p:ajax listener="#{emprestimosController.biblioteca}" ></p:ajax>
+			<p:ajax listener="#{emprestimosController.biblioteca}"></p:ajax>
 			<f:selectItem itemValue="" itemLabel="Biblioteca..." />
 			<f:selectItems value="#{emprestimosController.tipos}" />
 		</p:selectOneMenu>
-
 		<!-- Apresenta os itens cadastrados -->
 		<p:selectOneMenu id="item" value="#{emprestimosController.biblioteca}">
 			<f:selectItem itemValue="" itemLabel="Itens..." />
 			<f:selectItems value="#{emprestimosController.library}" />
 		</p:selectOneMenu>
-
 		<h:outputText value="Destinatario"></h:outputText>
 		<p:inputText value="#{emprestimosController.destinatario}"></p:inputText>
-
 		<h:outputText value="Data de emprestimo"></h:outputText>
 		<p:calendar mode="inline"></p:calendar>
-
 		<h:outputText value="Observação"></h:outputText>
 		<h:inputTextarea></h:inputTextarea>
-
 	</h:form>
 </h:body>
 </html>

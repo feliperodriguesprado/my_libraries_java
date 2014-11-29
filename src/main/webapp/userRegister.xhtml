@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>MyLibraries</title>
+	<link rel="shortcut icon" href="images/logo.ico" type="image/x-icon"/>
+	<link rel="stylesheet" href="css/styleUserRegister.css"></link>
+</h:head>
+<h:body>
+
+	<p:panel styleClass="panelMain">
+
+		<h1>MyLibraries</h1>
+
+		<h:form id="formRegistrationId" styleClass="formRegistration">
+
+			<p:panel styleClass="panelRegister">
+
+				<h2>Cadastro de novo usuário</h2>
+
+				<p:inputText id="inputTextName" required="true" styleClass="input" value="#{userRegisterController.name}"></p:inputText>
+				<p:watermark for="inputTextName" value="Nome ou apelido" />
+
+				<p:inputText id="inputTextEmail" required="true" styleClass="input" value="#{userRegisterController.email}"></p:inputText>
+				<p:watermark for="inputTextEmail" value="E-mail" />
+
+				<p:password 
+					id="inputPassword"
+					required="true"
+					styleClass="input"
+					value="#{userRegisterController.senha}">
+				</p:password>
+				<p:watermark for="inputPassword" value="Senha" />
+
+				<p:password 
+					id="inputTextConfirmPassword"
+					required="true"
+					styleClass="input"
+					value="#{userRegisterController.confirmSenha}">
+				</p:password>
+				<p:watermark for="inputTextConfirmPassword" value="Confirme a senha" />
+				
+				<p:commandButton 
+					styleClass="button" 
+					value="Cadastrar"
+					update="formRegistrationId"
+					icon="ui-icon-check"
+					action="#{userRegisterController.saveUser}" />
+				
+				<p:link styleClass="button linkBack" value="Cancelar" href="index.xhtml" />
+				
+				<p:growl id="msgs" showDetail="true" />
+			
+			</p:panel>
+		
+		</h:form>
+		
+		<p:panel styleClass="panelLogo">
+			
+			<p:graphicImage value="images/logoLogin.png"></p:graphicImage>
+		
+		</p:panel>
+	</p:panel>
+</h:body>
+</html>
