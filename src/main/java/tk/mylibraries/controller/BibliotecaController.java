@@ -17,6 +17,7 @@ import tk.mylibraries.orm.HibernateUtil;
 
 @ManagedBean
 public class BibliotecaController {
+	
 	private Biblioteca biblioteca;
 	private BibliotecaDAO bibliotecaDAO;
 	private String nome;
@@ -25,7 +26,7 @@ public class BibliotecaController {
 	private List<ClassificacaoBiblioteca> classificacaoBibliotecaList;
 	private TipoBiblioteca tipoBiblioteca;
 	private ClassificacaoBiblioteca classificacaoBiblioteca;
-
+	
 	public BibliotecaController() {
 		bibliotecaDAO = new BibliotecaDAO(HibernateUtil.getEntityManager());
 		biblioteca = new Biblioteca();
