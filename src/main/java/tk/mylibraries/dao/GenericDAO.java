@@ -29,6 +29,11 @@ public class GenericDAO<T, PK> {
 		em.merge(entity);
 		em.getTransaction().commit();
 	}
+	public void delete(T entity) {
+		em.getTransaction().begin();
+		em.remove(entity);
+		em.getTransaction().commit();
+	}
 
 	public T getById(PK id) {
 		@SuppressWarnings("unchecked")

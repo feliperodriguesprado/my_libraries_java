@@ -26,7 +26,7 @@ public class FilterLogin implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
         HttpSession session = request.getSession(false);
-
+        
         if (session == null || session.getAttribute("user") == null) {
             response.sendRedirect(request.getContextPath() + "/index.xhtml");
         } else {

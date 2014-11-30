@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>MyLibraries</title>
+	<link rel="shortcut icon" href="images/logo.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="css/styleUserRegister.css"></link>
+</h:head>
+<body>
+	<h:form>
+		<p:messages autoUpdate="true" />
+
+		<!-- 		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5"> -->
+
+		<p:inputText id="inputTextNameLib" styleClass="input"
+			value="#{bibliotecaController.nome}">
+			<f:validateRegex
+				pattern="[a-z\s]+$" />
+		</p:inputText>
+
+		<p:selectOneMenu id="tipo"
+			value="#{bibliotecaController.tipoBiblioteca}">
+			<f:selectItem itemLabel="Escolha o tipo da biblioteca" itemValue="" />
+			<f:selectItems value="#{bibliotecaController.tipoBibliotecaList}" />
+		</p:selectOneMenu>
+		<!-- 		</h:panelGrid> -->
+		
+		<p:selectOneMenu id="classificacao"
+			value="#{bibliotecaController.classificacaoBiblioteca}">
+			<f:selectItem itemLabel="Clasifique sua biblioteca" itemValue="" />
+			<f:selectItems value="#{bibliotecaController.classificacaoBibliotecaList}" />
+		</p:selectOneMenu>
+		
+        <p:selectBooleanCheckbox value="#{bibliotecaController.desejado}" />
+        <h:outputText value="Adicionar à minha lista de bibliotecas desejadas" />
+
+		<p:commandButton value="Submit" update="Salvar"
+			oncomplete="PF('dlg').show()" icon="ui-icon-check" />
+
+		<p:dialog header="Values" modal="true" showEffect="bounce"
+			widgetVar="dlg" resizable="false">
+			<p:panelGrid columns="2" id="display" columnClasses="label,value">
+				<h:outputText value="Basic:" />
+				<h:outputText value="#{selectOneMenuView.console}" />
+
+				<h:outputText value="Grouping:" />
+				<h:outputText value="#{selectOneMenuView.car}" />
+
+			</p:panelGrid>
+		</p:dialog>
+	</h:form>
+</body>
+</html>

@@ -14,7 +14,7 @@ public class EncryptionMD5 {
 	public static EncryptionMD5 getInstance() {
 		return INSTANCE;
 	}
-	
+
 	public String getPasswordEncryptionMD5(String password) {
 
 		String passwordEncryptionMD5 = null;
