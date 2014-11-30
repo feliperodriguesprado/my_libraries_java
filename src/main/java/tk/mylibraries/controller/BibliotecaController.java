@@ -1,5 +1,6 @@
 package tk.mylibraries.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -8,12 +9,14 @@ import javax.persistence.EntityManager;
 import javax.servlet.http.HttpSession;
 
 import tk.mylibraries.dao.BibliotecaDAO;
+import tk.mylibraries.dao.TipoBibliotecaDAO;
 import tk.mylibraries.dao.UsuarioDAO;
 import tk.mylibraries.entities.Biblioteca;
 import tk.mylibraries.entities.ClassificacaoBiblioteca;
 import tk.mylibraries.entities.TipoBiblioteca;
 import tk.mylibraries.entities.Usuario;
 import tk.mylibraries.orm.HibernateUtil;
+import tk.mylibraries.utils.WebUtils;
 
 @ManagedBean
 public class BibliotecaController {
@@ -52,6 +55,19 @@ public class BibliotecaController {
 		biblioteca.setUsuario(usuario);
 
 		bibliotecaDAO.save(biblioteca);
+	}
+	
+	public List<Object> getTipoBibliotecaByUser() {
+		long id = WebUtils.getInstance().getIdUserSession();
+		UsuarioDAO usuarioDAO = new UsuarioDAO(HibernateUtil.getEntityManager());
+		Usuario usuario = usuarioDAO.getById(id);
+		
+		TipoBibliotecaDAO tipoBibliotecaDAO = new TipoBibliotecaDAO(HibernateUtil.getEntityManager());
+		List<TipoBiblioteca> listTipos = tipoBibliotecaDAO.getAll();
+		List<TipoBiblioteca> listTiposDoUsuario = new ArrayList<TipoBiblioteca>();
+		for (TipoBiblioteca tipoBiblioteca : listTipos) {
+			select 
+		}
 	}
 
 	public List<Biblioteca> getAll() {
