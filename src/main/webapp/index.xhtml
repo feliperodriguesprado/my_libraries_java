@@ -22,11 +22,11 @@
 			<link rel="shortcut icon" href="css/images/logo.ico" type="image/x-icon"/>	<h2>Acesse sua conta</h2>
 			
 				<p:inputText id="inputTextEmail" styleClass="input" value="#{indexController.email}">
-					<f:validateRegex pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" />
+<!-- 					<f:validateRegex pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" /> -->
 				</p:inputText>
 				<p:watermark for="inputTextEmail" value="Email" />
 				
-				<p:password id="inputPassword" styleClass="input" required="true" value="#{indexController.password}"></p:password>
+				<p:password id="inputPassword" styleClass="input" value="#{indexController.password}"></p:password>
 				<p:watermark for="inputPassword" value="Senha" />
 				
 				<p:commandButton 
@@ -34,7 +34,7 @@
 					value="Entrar"
 					update="formRegistrationId"
 					icon="ui-icon-check" 
-					action="#{indexController.checkLogin}" />
+					actionListener="#{indexController.checkLogin}" />
 				
 				<p:link styleClass="button linkUserRegistration" value="Criar conta" href="userRegister.xhtml" />
 				

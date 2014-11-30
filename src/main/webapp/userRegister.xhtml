@@ -22,15 +22,14 @@
 
 				<h2>Cadastro de novo usuário</h2>
 
-				<p:inputText id="inputTextName" required="true" styleClass="input" value="#{userRegisterController.name}"></p:inputText>
+				<p:inputText id="inputTextName" styleClass="input" value="#{userRegisterController.name}"></p:inputText>
 				<p:watermark for="inputTextName" value="Nome ou apelido" />
 
-				<p:inputText id="inputTextEmail" required="true" styleClass="input" value="#{userRegisterController.email}"></p:inputText>
+				<p:inputText id="inputTextEmail" styleClass="input" value="#{userRegisterController.email}"></p:inputText>
 				<p:watermark for="inputTextEmail" value="E-mail" />
 
 				<p:password 
 					id="inputPassword"
-					required="true"
 					styleClass="input"
 					value="#{userRegisterController.senha}">
 				</p:password>
@@ -38,7 +37,6 @@
 
 				<p:password 
 					id="inputTextConfirmPassword"
-					required="true"
 					styleClass="input"
 					value="#{userRegisterController.confirmSenha}">
 				</p:password>
