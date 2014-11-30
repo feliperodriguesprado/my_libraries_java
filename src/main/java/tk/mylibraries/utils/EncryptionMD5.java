@@ -15,6 +15,9 @@ public class EncryptionMD5 {
 		return INSTANCE;
 	}
 	
+	/**
+	 * TODO: Comentar metodo.
+	 * */
 	public String getPasswordEncryptionMD5(String password) {
 
 		String passwordEncryptionMD5 = null;
