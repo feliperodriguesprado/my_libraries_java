@@ -20,8 +20,6 @@ public class BibliotecaController {
 	
 	private Biblioteca biblioteca;
 	private BibliotecaDAO bibliotecaDAO;
-	private String nome;
-	private Boolean desejado = false;
 	private List<TipoBiblioteca> tipoBibliotecaList;
 	private List<ClassificacaoBiblioteca> classificacaoBibliotecaList;
 	private TipoBiblioteca tipoBiblioteca;
@@ -30,8 +28,7 @@ public class BibliotecaController {
 	public BibliotecaController() {
 		bibliotecaDAO = new BibliotecaDAO(HibernateUtil.getEntityManager());
 		biblioteca = new Biblioteca();
-		classificacaoBibliotecaList = new ClassificacaoBibliotecaController()
-				.getAll();
+		classificacaoBibliotecaList = new ClassificacaoBibliotecaController().getAll();
 		tipoBibliotecaList = new TipoBibliotecaController().getAll();
 		tipoBiblioteca = new TipoBiblioteca();
 		classificacaoBiblioteca = new ClassificacaoBiblioteca();
@@ -41,8 +38,8 @@ public class BibliotecaController {
 	public void salvar() {
 		Biblioteca biblioteca = new Biblioteca();
 		biblioteca.setClassificacaoBiblioteca(classificacaoBiblioteca);
-		biblioteca.setDesejado(desejado);
-		biblioteca.setNome(nome);
+		biblioteca.setDesejado(this.biblioteca.isDesejado());
+		biblioteca.setNome(this.biblioteca.getNome());
 		biblioteca.setTipoBiblioteca(tipoBiblioteca);
 
 		FacesContext context = FacesContext.getCurrentInstance();
