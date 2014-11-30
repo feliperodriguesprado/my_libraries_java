@@ -11,6 +11,7 @@ import tk.mylibraries.entities.Usuario;
 public class WebUtils {
 
 	private static final WebUtils INSTANCE = new WebUtils();
+	private FacesContext facesContextCurrenteInstance = FacesContext.getCurrentInstance();;
 	
 	private WebUtils() {
 	}
@@ -28,7 +29,7 @@ public class WebUtils {
 	public void redirectPage(String page) {
 		
 		try {
-			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			ExternalContext externalContext = facesContextCurrenteInstance.getExternalContext();
 			externalContext.redirect(page);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -44,8 +45,7 @@ public class WebUtils {
 	public Long getIdUserSession() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
-		Long userId = (Long) session.getAttribute("user");
-		return userId;
+		return Long.parseLong(session.getAttribute("user").toString());
 	}
 	
 	/**
@@ -56,8 +56,14 @@ public class WebUtils {
 	 *            sessao do browser.
 	 */
 	public void setSession(Usuario usuario) {
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.getExternalContext().getSessionMap().put("user", usuario.getUsuarioId());
+		facesContextCurrenteInstance.getExternalContext().getSessionMap().put("user", usuario.getUsuarioId());
+	}
+	
+	/**
+	 * 
+	 */
+	public void invalidateSession() {
+		facesContextCurrenteInstance.getExternalContext().invalidateSession();
 	}
 	
 }

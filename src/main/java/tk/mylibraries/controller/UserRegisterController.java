@@ -17,6 +17,9 @@ public class UserRegisterController {
 	private Usuario usuario;
 	private String confirmSenha;
 	
+	/**
+	 * TODO: Fazer comentario.
+	 */
 	public void saveUser() {
 		
 		if (usuario.getSenha().equals(confirmSenha)) {

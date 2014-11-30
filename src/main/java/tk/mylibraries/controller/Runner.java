@@ -41,5 +41,6 @@ public class Runner {
 		bb.setDesejado(true);
 		
 		bb.salvar();
+		
 	}
 }
