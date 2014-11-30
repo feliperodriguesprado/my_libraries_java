@@ -16,7 +16,7 @@ public class EncryptionMD5 {
 	}
 	
 	/**
-	 * TODO: Comentar metodo.
+	 * TODO: Metodo que converte a string recebida no parametro de entrada para MD5.
 	 * */
 	public String getPasswordEncryptionMD5(String password) {
 
