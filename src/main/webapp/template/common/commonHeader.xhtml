@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>MyLibraries</title>
+</h:head>
+<h:body>
+
+	<p:panel id="panelHeader" style="border:none">
+
+		<h:form id="formMenu">
+
+			<p:menubar>
+
+				<p:menuitem value="Principal" icon="ui-icon-home" url="main.xhtml">
+				</p:menuitem>
+
+				<p:menuitem value="Bibliotecas" icon="ui-icon-pencil"
+					url="biblioteca.xhtml">
+				</p:menuitem>
+
+				<p:menuitem value="Empréstimos" icon="ui-icon-newwin"
+					url="emprestimo.xhtml">
+				</p:menuitem>
+
+				<p:menuitem value="Sobre" icon="ui-icon-help" url="about.xhtml">
+				</p:menuitem>
+
+				<f:facet name="options">
+					
+					<h:outputText value="Olá #{userController.currentUser}" style="margin-right:10px" placeholder="Search" />
+					
+					<p:commandButton value="Conta"
+						icon="ui-icon-extlink" />
+					
+					<p:commandButton value="Logout" update="formMenu"
+						icon="ui-icon-close" actionListener="#{userController.logout}" />	
+				
+				</f:facet>
+
+			</p:menubar>
+		</h:form>
+
+	</p:panel>
+
+	<ui:insert name="panelBody">
+
+	</ui:insert>
+
+
+</h:body>
+</html>

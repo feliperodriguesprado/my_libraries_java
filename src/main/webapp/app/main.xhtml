@@ -3,30 +3,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>MyLibraries</title>
 </h:head>
 <h:body>
 
-	<p:panel id="panelPrincipal">
-		
-		<h:outputText value="MyLibraries - pagina principal"></h:outputText>
-		
-		<br></br>
-		<br></br>
-		
-		<h:outputText value="ID usuário: #{mainController.currentUser}"></h:outputText>
-		
-		<br></br>
-		<br></br>
-		
-		<p:commandButton 
-			value="Logout" 
-			action="#{mainController.logout}"/>
-		
-	</p:panel>
+	<ui:composition template="../template/common/commonHeader.xhtml">
+
+		<ui:define name="panelBody">
+
+			<p:panel id="panelPrincipal">
+
+				<h:outputText value="MyLibraries - pagina principal"></h:outputText>
+
+			</p:panel>
+		</ui:define>
+
+	</ui:composition>
+
 
 </h:body>
 </html>

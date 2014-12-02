@@ -1,15 +1,12 @@
 package tk.mylibraries.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
 import tk.mylibraries.dao.UsuarioDAO;
 import tk.mylibraries.entities.Usuario;
 import tk.mylibraries.orm.HibernateUtil;
+import tk.mylibraries.utils.Messages;
 import tk.mylibraries.utils.WebUtils;
 
 @ManagedBean
@@ -23,8 +20,16 @@ public class IndexController {
 		usuarioDAO = new UsuarioDAO(HibernateUtil.getEntityManager());
 	}
 	
-	public void checkLogin() {
-		
+	public void checkLogin(ActionEvent actionEvent) {
+
+		if (email.equals("") || password.equals("")) {
+			Messages.getInstance().setMessageError("Erro", "Informe corretamente todos os campos!");
+			return;
+		} else if (!email.matches("^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$")) {
+			Messages.getInstance().setMessageError("Erro", "Informe um email válido!");
+			return;
+		}
+	    
 		Usuario usuario = usuarioDAO.getUsuarioByEmail(email);
 		
 		if (usuario != null) {
@@ -33,17 +38,11 @@ public class IndexController {
 				WebUtils.getInstance().redirectPage("app/emprestimo.xhtml");
 			}
 		}
-		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "E-mail ou senha incorretos");
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-	}
-	
-	public String getHorario() {
-		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
-	    return "Atualizado em " + sdf.format(new Date());
+		Messages.getInstance().setMessageError("Erro", "E-mail ou senha incorretos!");
 	}
 	
 	public void setEmail(String email) {
-		this.email = email;
+		this.email = email.trim();
 	}
 	
 	public String getEmail() {
@@ -51,7 +50,7 @@ public class IndexController {
 	}
 	
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = password.trim();
 	}
 	
 	public String getPassword() {

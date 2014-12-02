@@ -2,7 +2,6 @@ package tk.mylibraries.utils;
 
 import java.io.IOException;
 
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -12,13 +11,58 @@ public class WebUtils {
 
 	private static final WebUtils INSTANCE = new WebUtils();
 	
-	private FacesContext facesContextCurrenteInstance = FacesContext.getCurrentInstance();;
-	
 	private WebUtils() {
 	}
 	
 	public static WebUtils getInstance() {
 		return INSTANCE;
+	}
+	
+	/**
+	 * Metodo que obtem o Faces Context utilizado para obter a sessao do
+	 * browser.
+	 * 
+	 * @return {@link FacesContext}
+	 */
+	public FacesContext getFacesContext() {  
+        return FacesContext.getCurrentInstance();  
+    }
+	
+	/**
+	 * Metodo que obtem a sessao do browser.
+	 * @return {@link HttpSession}
+	 */
+	public HttpSession getSession() {
+		return (HttpSession) getFacesContext().getExternalContext().getSession(false);
+	}
+	
+	/**
+	 * Metodo obtem o ID do usuario na sessao do browser.
+	 * 
+	 * @return {@link Long}
+	 */
+	public Long getIdUserSession() {
+		return Long.parseLong(getSession().getAttribute("user").toString());
+	}
+	
+	
+	/**
+	 * Metodo que grava o ID do uauario na sessao do browser.
+	 * 
+	 * @param usuario
+	 *            {@link Usuario} - objeto com o usuario que sera gravado na
+	 *            sessao do browser.
+	 */
+	public void setSession(Usuario usuario) {
+		getFacesContext().getExternalContext().getSessionMap().put("user", usuario.getUsuarioId());
+		//getSession().setAttribute("user", usuario.getUsuarioId());
+	}
+	
+	/**
+	 * Metodo que remove o usuario da sessao.
+	 */
+	public void invalidateSession() {
+		getSession().invalidate();
 	}
 	
 	/**
@@ -30,41 +74,11 @@ public class WebUtils {
 	public void redirectPage(String page) {
 		
 		try {
-			ExternalContext externalContext = facesContextCurrenteInstance.getExternalContext();
-			externalContext.redirect(page);
+			getFacesContext().getExternalContext().redirect(page);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-	
-	/**
-	 * Metodo obtem o ID do usuario na sessao do browser.
-	 * 
-	 * @return {@link Long}
-	 */
-	public Long getIdUserSession() {
-		FacesContext context = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
-		return Long.parseLong(session.getAttribute("user").toString());
-	}
-	
-	/**
-	 * Metodo que grava o ID do uauario na sessao do browser.
-	 * 
-	 * @param usuario
-	 *            {@link Usuario} - objeto com o usuario que sera gravado na
-	 *            sessao do browser.
-	 */
-	public void setSession(Usuario usuario) {
-		facesContextCurrenteInstance.getExternalContext().getSessionMap().put("user", usuario.getUsuarioId());
-	}
-	
-	/**
-	 * 
-	 */
-	public void invalidateSession() {
-		facesContextCurrenteInstance.getExternalContext().invalidateSession();
 	}
 	
 }
