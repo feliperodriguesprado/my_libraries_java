@@ -9,24 +9,42 @@
 	<title>Emprestimos</title>
 </h:head>
 <h:body>
+
+
 	<h:form>
+
 		<!-- Apresenta as bibliotecas cadastradas -->
 		<p:selectOneMenu id="lib" value="#{emprestimosController.tipo}">
-			<p:ajax listener="#{emprestimosController.biblioteca}"></p:ajax>
 			<f:selectItem itemValue="" itemLabel="Biblioteca..." />
 			<f:selectItems value="#{emprestimosController.tipos}" />
 		</p:selectOneMenu>
+
 		<!-- Apresenta os itens cadastrados -->
 		<p:selectOneMenu id="item" value="#{emprestimosController.biblioteca}">
 			<f:selectItem itemValue="" itemLabel="Itens..." />
-			<f:selectItems value="#{emprestimosController.library}" />
+			<f:selectItems value="#{emprestimosController.bibliotecas}" />
 		</p:selectOneMenu>
-		<h:outputText value="Destinatario"></h:outputText>
-		<p:inputText value="#{emprestimosController.destinatario}"></p:inputText>
-		<h:outputText value="Data de emprestimo"></h:outputText>
-		<p:calendar mode="inline"></p:calendar>
-		<h:outputText value="Observação"></h:outputText>
-		<h:inputTextarea></h:inputTextarea>
+
+		<br></br>
+
+		<p:outputLabel value="Destinatario"></p:outputLabel>
+		<p:inputText id="destinatario"></p:inputText>
+
+		<br></br>
+
+		<p:outputLabel value="Data de emprestimo"></p:outputLabel>
+		<p:calendar id="dataNascimento" mode="inline"></p:calendar>
+
+		<br></br>
+
+		<p:outputLabel value="Observação"></p:outputLabel>
+		<p:inputTextarea id="observacao"></p:inputTextarea>
+
+		<br></br>
+
+		<p:commandButton value="Salvar"
+			action="#{emprestimosController.cadastrar}"></p:commandButton>
+
 	</h:form>
 </h:body>
 </html>

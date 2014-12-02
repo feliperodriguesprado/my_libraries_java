@@ -35,7 +35,7 @@ public class IndexController {
 		if (usuario != null) {
 			if (usuarioDAO.checkPasswordUser(usuario, password)) {
 				WebUtils.getInstance().setSession(usuario);
-				WebUtils.getInstance().redirectPage("app/main.xhtml");
+				WebUtils.getInstance().redirectPage("app/emprestimo.xhtml");
 			}
 		}
 		Messages.getInstance().setMessageError("Erro", "E-mail ou senha incorretos!");
