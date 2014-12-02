@@ -26,15 +26,6 @@ public class EmprestimosController {
 	TipoBiblioteca tipo = new TipoBiblioteca();
 	private EmprestimoDAO dao;
 	private List emprestimos;
-	private List<Biblioteca> library;
-
-	public List<Biblioteca> getLibrary() {
-		return library;
-	}
-
-	public void setLibrary(List<Biblioteca> library) {
-		this.library = library;
-	}
 
 	public TipoBiblioteca getTipo() {
 		return tipo;
@@ -46,7 +37,7 @@ public class EmprestimosController {
 
 	// insere as bibliotecas cadastras no combobox de bibliotecas
 	public List<SelectItem> getTipos() {
-		System.out.println("Chegou nessa bosta");
+		
 		List<TipoBiblioteca> tipos = new TipoBibliotecaDAO(
 				HibernateUtil.getEntityManager()).getAll();
 		List<SelectItem> lib = new ArrayList<SelectItem>(tipos.size());
@@ -57,21 +48,17 @@ public class EmprestimosController {
 		return lib;
 	}
 
-	public void getBibliotecas() {
-		if (tipo != null && !tipo.equals("")) {
-			List<Biblioteca> library = new EmprestimoDAO(
-					HibernateUtil.getEntityManager())
-					.getBibliotecasPeloTipo(tipo.getTipoId());
-		}
-		// System.out.println("Chegou nessa bosta");
-		// List<Biblioteca> bibliotecas = new BibliotecaDAO(
-		// HibernateUtil.getEntityManager()).getAll();
-		// List<SelectItem> bib = new ArrayList<SelectItem>(bibliotecas.size());
-		// for (Biblioteca p : bibliotecas) {
-		// System.out.println(p.getNome());
-		// bib.add(new SelectItem(p.getBibliotecaId(), p.getNome()));
-		// }
-		// return bib;
+	public List<SelectItem> getBibliotecas() {
+		
+		 System.out.println("Chegou nessa bosta");
+		 List<Biblioteca> bibliotecas = new BibliotecaDAO(
+		 HibernateUtil.getEntityManager()).getAll();
+		 List<SelectItem> bib = new ArrayList<SelectItem>(bibliotecas.size());
+		 for (Biblioteca p : bibliotecas) {
+		 System.out.println(p.getNome());
+		 bib.add(new SelectItem(p.getBibliotecaId(), p.getNome()));
+		 }
+		 return bib;
 	}
 
 	public Biblioteca getBiblioteca() {
