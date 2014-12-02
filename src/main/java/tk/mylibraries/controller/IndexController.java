@@ -30,7 +30,7 @@ public class IndexController {
 		if (usuario != null) {
 			if (usuarioDAO.checkPasswordUser(usuario, password)) {
 				WebUtils.getInstance().setSession(usuario);
-				WebUtils.getInstance().redirectPage("app/main.xhtml");
+				WebUtils.getInstance().redirectPage("app/emprestimo.xhtml");
 			}
 		}
 		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "E-mail ou senha incorretos");

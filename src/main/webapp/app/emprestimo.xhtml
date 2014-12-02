@@ -12,7 +12,7 @@
 	<h:form>
 		<!-- Apresenta as bibliotecas cadastradas -->
 		<p:selectOneMenu id="lib" value="#{emprestimosController.tipo}">
-			<p:ajax listener="#{emprestimosController.biblioteca}"></p:ajax>
+			<p:ajax listener="#{emprestimosController.getBibliotecas}"></p:ajax>
 			<f:selectItem itemValue="" itemLabel="Biblioteca..." />
 			<f:selectItems value="#{emprestimosController.tipos}" />
 		</p:selectOneMenu>
@@ -20,13 +20,14 @@
 		<p:selectOneMenu id="item" value="#{emprestimosController.biblioteca}">
 			<f:selectItem itemValue="" itemLabel="Itens..." />
 			<f:selectItems value="#{emprestimosController.library}" />
-		</p:selectOneMenu>
-		<h:outputText value="Destinatario"></h:outputText>
-		<p:inputText value="#{emprestimosController.destinatario}"></p:inputText>
-		<h:outputText value="Data de emprestimo"></h:outputText>
-		<p:calendar mode="inline"></p:calendar>
-		<h:outputText value="Observação"></h:outputText>
-		<h:inputTextarea></h:inputTextarea>
+		</p:selectOneMenu><br></br>
+		<p:outputLabel value="Destinatario"></p:outputLabel>
+		<p:inputText value="#{emprestimosController.destinatario}"></p:inputText><br></br>
+		<p:inputText value="Data de emprestimo" ></p:inputText>
+		<p:calendar mode="inline"></p:calendar><br></br>
+		<p:outputLabel value="Observação"></p:outputLabel>
+		<p:inputTextarea></p:inputTextarea>
+		<p:commandButton value="Salvar" action="#{emprestimosController.cadastrar}"></p:commandButton>
 	</h:form>
 </h:body>
 </html>
