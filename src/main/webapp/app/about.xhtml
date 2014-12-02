@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>MyLibraries</title>
+</h:head>
+<h:body>
+
+	<ui:composition template="../template/common/commonHeader.xhtml">
+
+		<ui:define name="panelBody">
+
+		<h:form id="formAbout">
+
+			<p:panel styleClass="panelAbout">
+	
+				<h2>Sobre</h2>
+				
+				<h:outputText styleClass="textAbout" value="O sistema web MyLibraries tem o objetivo de auxiliar o usuário no cadastro e controle de empréstimos de suas bibliotecas, onde é possível cadastar seus livros, músicas e vídeos, além de possibilitar o controle dos empréstimos realizados de suas bibliotecas. O projeto MyLibraries está disponível no GitHub, para acessar o projeto basta clicar no link abaixo."></h:outputText>
+
+				<p:panel styleClass="panelGitHubAbout">
+				
+					<p:link styleClass="linkGitHubAbout" value="Projeto GitHub" href="https://github.com/feliperodriguesprado/MyLibraries_JavaEE7" target="_blank"></p:link>
+				
+					<h:outputLink value="https://github.com/feliperodriguesprado/MyLibraries_JavaEE7" target="_blank">	
+				
+						<p:graphicImage styleClass="imageLinkGitHubAbout" value="../images/github.png"></p:graphicImage>
+				
+					</h:outputLink>
+				
+				</p:panel>
+				
+
+			</p:panel>
+			
+		</h:form>
+		
+		</ui:define>
+
+	</ui:composition>
+
+
+</h:body>
+</html>

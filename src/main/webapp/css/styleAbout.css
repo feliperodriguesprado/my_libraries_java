@@ -1,0 +1,42 @@
+.panelAbout {
+	background-color: white;
+	border: 1px solid #bdbdbd;
+	margin: 30px auto;
+	margin-top: 40px;
+	padding: 20px;
+	width: 50%;
+	height: 270px;
+}
+
+.textAbout {
+	color: #696969;
+	font-size: 16px;
+	font-weight: normal;
+	margin-bottom: 30px;
+}
+
+.imageLinkGitHubAbout {
+	background-image: url(images/github.png);
+	background-repeat: no-repeat;
+	float: left;
+	width: 60px;
+	height: 60px;
+}
+
+.panelGitHubAbout {
+	margin-left: -35px;
+	border: none;
+	
+}
+
+.linkGitHubAbout {
+	margin-top: 25px;
+	display: inline-block;
+	text-decoration: none;
+	color: #696969;
+	font-size: 16px;
+}
+
+.linkGitHubAbout:hover {
+	text-decoration: underline;
+}
