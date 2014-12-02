@@ -15,8 +15,8 @@ public class Messages {
 	
 	/**
 	 * Metodo que mostra na tela uma mensagem de erro.
-	 * @param summary
-	 * @param detail
+	 * @param summary {@link String} - Titulo da mensagem.
+	 * @param detail {@link String} - Mensagem do erro.
 	 */
 	public void setMessageError(String summary, String detail) {
 		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail);
