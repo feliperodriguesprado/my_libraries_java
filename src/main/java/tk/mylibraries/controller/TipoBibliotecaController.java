@@ -14,7 +14,6 @@ public class TipoBibliotecaController {
 
 	private TipoBiblioteca biblioteca;
 	private TipoBibliotecaDAO tipoBibliotecaDAO;
-	private String nome;
 
 	public TipoBibliotecaController() {
 		tipoBibliotecaDAO = new TipoBibliotecaDAO(
@@ -30,7 +29,7 @@ public class TipoBibliotecaController {
 			biblioteca.setNome("Músicas");
 			tipos.add(biblioteca);
 			biblioteca = new TipoBiblioteca();
-			biblioteca.setNome("Animes");
+			biblioteca.setNome("Livros");
 			tipos.add(biblioteca);
 			for (TipoBiblioteca tipoBiblioteca : tipos) {
 				tipoBibliotecaDAO.save(tipoBiblioteca);

@@ -6,12 +6,9 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.Query;
 import javax.servlet.http.HttpSession;
 
 import tk.mylibraries.dao.BibliotecaDAO;
-import tk.mylibraries.dao.TipoBibliotecaDAO;
 import tk.mylibraries.dao.UsuarioDAO;
 import tk.mylibraries.entities.Biblioteca;
 import tk.mylibraries.entities.ClassificacaoBiblioteca;
@@ -22,10 +19,15 @@ import tk.mylibraries.utils.WebUtils;
 
 @ManagedBean
 public class BibliotecaController {
+	// Messages.getInstance().setMessageError("Erro",
+	// "E-mail ou senha incorretos!");
 
 	private Biblioteca biblioteca;
 	private BibliotecaDAO bibliotecaDAO;
 	private List<TipoBiblioteca> tipoBibliotecaList;
+	private TipoBiblioteca biblioteca1;
+	private TipoBiblioteca biblioteca2;
+	private TipoBiblioteca biblioteca3;
 	private List<ClassificacaoBiblioteca> classificacaoBibliotecaList;
 	private TipoBiblioteca tipoBiblioteca;
 	private ClassificacaoBiblioteca classificacaoBiblioteca;
@@ -39,6 +41,11 @@ public class BibliotecaController {
 		classificacaoBibliotecaList = new ClassificacaoBibliotecaController()
 				.getAll();
 		tipoBibliotecaList = new TipoBibliotecaController().getAll();
+		biblioteca1 = biblioteca2 = biblioteca3 = new TipoBiblioteca();
+		biblioteca1 = tipoBibliotecaList.get(0);
+		biblioteca2 = tipoBibliotecaList.get(1);
+		biblioteca3 = tipoBibliotecaList.get(2);
+
 		tipoBiblioteca = new TipoBiblioteca();
 		classificacaoBiblioteca = new ClassificacaoBiblioteca();
 
@@ -66,34 +73,25 @@ public class BibliotecaController {
 
 	public void getTipoBibliotecaByUser() {
 
-		List<Object> listAll = new ArrayList<Object>();
-		long id = WebUtils.getInstance().getIdUserSession();
-		UsuarioDAO usuarioDAO = new UsuarioDAO(HibernateUtil.getEntityManager());
-		Usuario usuario = usuarioDAO.getById(id);
-
-		TipoBibliotecaDAO tipoBibliotecaDAO = new TipoBibliotecaDAO(
-				HibernateUtil.getEntityManager());
-		List<TipoBiblioteca> listTipos = tipoBibliotecaDAO.getAll();
 		EntityManager em = HibernateUtil.getEntityManager();
+		List<Biblioteca> listAll = new ArrayList<Biblioteca>();
+		UsuarioDAO usuarioDAO = new UsuarioDAO(em);
+
 		WebUtils webUtils = WebUtils.getInstance();
 		long idUsuario = webUtils.getIdUserSession();
+		Usuario usuario2 = usuarioDAO.getById(idUsuario);
+		listAll = bibliotecaDAO.getListByUser(usuario2);
 
-		for (TipoBiblioteca tipoBiblioteca : listTipos) {
-			long idTipo = tipoBiblioteca.getTipoId();
-
-			try {
-				String query = "select * from biblioteca join tipo_biblioteca on tipo_biblioteca.tipoid = biblioteca.bibliotecaid join usuario on usuario.usuarioid = biblioeca.usuarioid where usuarioid = :idUsuario and tipo_biblioteca.tipoid = :idTipo";
-				Query q = em.createQuery(query);
-				q.setParameter("idUsuario", idUsuario);
-				q.setParameter("idTipo", idTipo);
-				Object result = q.getResultList();
-				listAll.add(result);
-			} catch (NoResultException e) {
+		for (Biblioteca biblioteca : listAll) {
+			if (biblioteca.getBibliotecaId() == 1) {
+				list1.add(biblioteca);
+			} else if (biblioteca.getBibliotecaId() == 2) {
+				list2.add(biblioteca);
+			} else if (biblioteca.getBibliotecaId() == 3) {
+				list3.add(biblioteca);
 			}
+
 		}
-		list1 = (List<Biblioteca>) listAll.get(0);
-		list2 = (List<Biblioteca>) listAll.get(1);
-		list3 = (List<Biblioteca>) listAll.get(2);
 
 	}
 
@@ -160,6 +158,26 @@ public class BibliotecaController {
 
 	public List<Biblioteca> getList3() {
 		return list3;
+	}
+
+	public TipoBiblioteca getBiblioteca1() {
+		return biblioteca1;
+	}
+
+	public TipoBiblioteca getBiblioteca2() {
+		return biblioteca2;
+	}
+
+	public TipoBiblioteca getBiblioteca3() {
+		return biblioteca3;
+	}
+
+	public Biblioteca getBiblioteca() {
+		return biblioteca;
+	}
+
+	public void setBiblioteca(Biblioteca biblioteca) {
+		this.biblioteca = biblioteca;
 	}
 
 }
