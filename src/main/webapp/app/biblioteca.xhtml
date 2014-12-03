@@ -48,7 +48,7 @@
 					<h:outputText
 						value="Adicionar à minha lista de bibliotecas desejadas" />
 
-					<p:commandButton value="Submit" update="Salvar"
+					<p:commandButton value="Submit"
 						actionListener="#{bibliotecaController.salvar}" />
 
 				</h:form>
@@ -57,9 +57,9 @@
 			<p:scrollPanel>
 
 				<h:outputText>Bibliotecas desejadas</h:outputText>
-				</br>
+				<br />
 				<h:form id="formPanel">
-					</br>
+					<br />
 					<h:outputText value="#{bibliotecaController.biblioteca1}"></h:outputText>
 					<p:dataTable var="lista1" value="#{bibliotecaController.list1}">
 
@@ -80,14 +80,14 @@
 							<p:commandLink title="Alterar" update=":formAlterar:Alterar"
 								oncomplete="dialogAlterar.show()" immediate="true">
 								<p:graphicImage value="./images/editar.png" />
-								<f:setPropertyActionListener target="#{bibliotecaController.biblioteca}"
-									value="#{lista1}" />
+								<f:setPropertyActionListener
+									target="#{bibliotecaController.biblioteca}" value="#{lista1}" />
 							</p:commandLink>
 							<p:commandLink title="Excluir" update=":formExcluir:Excluir"
 								oncomplete="confirmation.show()" immediate="true">
 								<p:graphicImage value="./images/excluir.png" />
-								<f:setPropertyActionListener target="#{bibliotecaController.biblioteca}"
-									value="#{lista1}" />
+								<f:setPropertyActionListener
+									target="#{bibliotecaController.biblioteca}" value="#{lista1}" />
 							</p:commandLink>
 						</p:column>
 
@@ -95,11 +95,7 @@
 
 
 
-					<!-- 					-------------------------------------------------------------------------- -->
-
-
-
-					</br>
+					<br />
 					<h:outputText value="#{bibliotecaController.biblioteca2}"></h:outputText>
 					<p:dataTable var="lista2" value="#{bibliotecaController.list2}">
 
@@ -119,15 +115,15 @@
 						<p:column headerText="Ações">
 							<p:commandLink title="Alterar" update=":formAlterar:Alterar"
 								oncomplete="dialogAlterar.show()" immediate="true">
-								<p:graphicImage value="./images/editar.png"/>
-								<f:setPropertyActionListener target="#{bibliotecaController.biblioteca}"
-									value="#{lista2}" />
+								<p:graphicImage value="./images/editar.png" />
+								<f:setPropertyActionListener
+									target="#{bibliotecaController.biblioteca}" value="#{lista2}" />
 							</p:commandLink>
 							<p:commandLink title="Excluir" update=":formExcluir:Excluir"
 								oncomplete="confirmation.show()" immediate="true">
-								<p:graphicImage value="./images/excluir.png"/>
-								<f:setPropertyActionListener target="#{bibliotecaController.biblioteca}"
-									value="#{lista2}" />
+								<p:graphicImage value="./images/excluir.png" />
+								<f:setPropertyActionListener
+									target="#{bibliotecaController.biblioteca}" value="#{lista2}" />
 							</p:commandLink>
 						</p:column>
 
@@ -136,12 +132,7 @@
 
 
 
-
-
-					<!-- 					-------------------------------------------------------------- -->
-
-
-					</br>
+					<br />
 					<h:outputText value="#{bibliotecaController.biblioteca3}"></h:outputText>
 					<p:dataTable var="lista3" value="#{bibliotecaController.list3}">
 
@@ -163,21 +154,21 @@
 								oncomplete="dialogAlterar.show()" immediate="true">
 								<p:graphicImage value="./images/editar.png" />
 								<f:setPropertyActionListener target="#{pessoaBean.pessoa}"
-									value="#{lista}" />
+									value="#{lista3}" />
 							</p:commandLink>
 							<p:commandLink title="Excluir" update=":formExcluir:Excluir"
 								oncomplete="confirmation.show()" immediate="true">
 								<p:graphicImage value="./images/excluir.png" />
 								<f:setPropertyActionListener target="#{pessoaBean.pessoa}"
-									value="#{lista}" />
+									value="#{lista3}" />
 							</p:commandLink>
 						</p:column>
 
 					</p:dataTable>
 				</h:form>
 			</p:scrollPanel>
-			
-			
+
+
 			<h:form id="formAlterar">
 				<p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true"
 					id="Alterar">
@@ -201,24 +192,24 @@
 					</p:panelGrid>
 					<p:commandButton value="Alterar"
 						actionListener="#{bibliotecaController.atualizar}"
-						update=":formPrincipal" oncomplete="dialogAlterar.hide()" />
+						update=":formPanel" oncomplete="dialogAlterar.hide()" />
 				</p:dialog>
 			</h:form>
-			
+
 			<h:form id="formExcluir">
-                <p:confirmDialog id="Excluir"
-                        message="Você gostaria de Deletar a mídia #{bibliotecaController.biblioteca.nome}?"
-                        header="Excluir" severity="alert" widgetVar="confirmation">
- 
-                        <p:commandButton id="confirm" value="Sim"
-                                oncomplete="confirmation.hide()"
-                                actionListener="#{bibliotecaController.deletar}"
-                                update=":formPrincipal" />
-                        <p:commandButton id="decline" value="Não"
-                                onclick="confirmation.hide()" type="button" />
- 
-                </p:confirmDialog>
-        </h:form>
+				<p:confirmDialog id="Excluir"
+					message="Você gostaria de Deletar a mídia #{bibliotecaController.biblioteca.nome}?"
+					header="Excluir" severity="alert" widgetVar="confirmation">
+
+					<p:commandButton id="confirm" value="Sim"
+						oncomplete="confirmation.hide()"
+						actionListener="#{bibliotecaController.deletar}"
+						update=":formPanel" />
+					<p:commandButton id="decline" value="Não"
+						onclick="confirmation.hide()" type="button" />
+
+				</p:confirmDialog>
+			</h:form>
 
 		</ui:define>
 
