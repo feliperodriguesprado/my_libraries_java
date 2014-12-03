@@ -1,50 +1,63 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Emprestimos</title>
-</h:head>
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:body>
 
+	<ui:composition template="../template/common/commonHeader.xhtml">
 
-	<h:form>
+		<ui:define name="panelBody">
 
-		<!-- Apresenta as bibliotecas cadastradas -->
-		<p:selectOneMenu id="lib" value="#{emprestimosController.tipo}">
-			<f:selectItem itemValue="" itemLabel="Biblioteca..." />
-			<f:selectItems value="#{emprestimosController.tipos}" />
-		</p:selectOneMenu>
+			<h:form>
 
-		<!-- Apresenta os itens cadastrados -->
-		<p:selectOneMenu id="item" value="#{emprestimosController.biblioteca}">
-			<f:selectItem itemValue="" itemLabel="Itens..." />
-			<f:selectItems value="#{emprestimosController.bibliotecas}" />
-		</p:selectOneMenu>
+				<p:growl id="msg" showDetail="true" />
 
-		<br></br>
+				<!-- Combo box tipo de biblioteca -->
+				<p:outputLabel for="typeLibrarie" value="Tipo biblioteca:" />
+				
+				<p:selectOneMenu 
+					id="typeLibrarie"
+					value="#{emprestimoController.idTypeLibrary}">
+					
+					<p:ajax 
+						listener="#{emprestimoController.onTypeLibraryChange}"
+						update="items" />
+					
+					<f:selectItem 
+						itemLabel="Selecione o tipo" 
+						itemValue=""
+						noSelectionOption="true" />
+					
+					<f:selectItems value="#{emprestimoController.typeLibraryMap}" />
+					
+				</p:selectOneMenu>
 
-		<p:outputLabel value="Destinatario"></p:outputLabel>
-		<p:inputText id="destinatario"></p:inputText>
+				<!-- Combo box bibliotecas -->
+				<p:outputLabel for="items" value="Itens:" />
+				
+				<p:selectOneMenu 
+					id="items" 
+					value="#{emprestimoController.idLibrary}">
+					
+					<f:selectItem 
+						itemLabel="Selecione a biblioteca" 
+						itemValue=""
+						noSelectionOption="true" />
+						
+					<f:selectItems value="#{emprestimoController.libraryMap}" />
+				
+				</p:selectOneMenu>
+				
+				<p:commandButton value="Salvar" update="msg" actionListener="#{emprestimoController.save}" icon="ui-icon-check" />
 
-		<br></br>
+			</h:form>
 
-		<p:outputLabel value="Data de emprestimo"></p:outputLabel>
-		<p:calendar id="dataNascimento" mode="inline"></p:calendar>
+		</ui:define>
 
-		<br></br>
+	</ui:composition>
 
-		<p:outputLabel value="Observação"></p:outputLabel>
-		<p:inputTextarea id="observacao"></p:inputTextarea>
-
-		<br></br>
-
-		<p:commandButton value="Salvar"
-			action="#{emprestimosController.cadastrar}"></p:commandButton>
-
-	</h:form>
 </h:body>
 </html>

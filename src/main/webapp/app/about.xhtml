@@ -6,44 +6,58 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
+
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>MyLibraries</title>
+
 </h:head>
+
 <h:body>
 
 	<ui:composition template="../template/common/commonHeader.xhtml">
 
 		<ui:define name="panelBody">
 
-		<h:form id="formAbout">
+			<h:form id="formAbout">
 
-			<p:panel styleClass="panelAbout">
+				<p:panel styleClass="panelAbout">
 	
-				<h2>Sobre</h2>
+					<h2>Sobre</h2>
 				
-				<h:outputText styleClass="textAbout" value="O sistema web MyLibraries tem o objetivo de auxiliar o usuário no cadastro e controle de empréstimos de suas bibliotecas, onde é possível cadastar seus livros, músicas e vídeos, além de possibilitar o controle dos empréstimos realizados de suas bibliotecas. O projeto MyLibraries está disponível no GitHub, para acessar o projeto basta clicar no link abaixo."></h:outputText>
+					<h:outputText 
+						styleClass="textAbout" 
+						value="O sistema web MyLibraries tem o objetivo de auxiliar o usuário no cadastro 
+						e controle de empréstimos de suas bibliotecas, onde é possível cadastar seus livros, 
+						músicas e vídeos, além de possibilitar o controle dos empréstimos realizados de suas bibliotecas. 
+						O projeto MyLibraries está disponível no GitHub, para acessar o projeto basta clicar no link abaixo." />
 
-				<p:panel styleClass="panelGitHubAbout">
+					<p:panel styleClass="panelGitHubAbout">
 				
-					<p:link styleClass="linkGitHubAbout" value="Projeto GitHub" href="https://github.com/feliperodriguesprado/MyLibraries_JavaEE7" target="_blank"></p:link>
+						<p:link 
+							styleClass="linkGitHubAbout" 
+							value="Projeto GitHub" 
+							href="https://github.com/feliperodriguesprado/MyLibraries_JavaEE7" 
+							target="_blank" />
 				
-					<h:outputLink value="https://github.com/feliperodriguesprado/MyLibraries_JavaEE7" target="_blank">	
+						<h:outputLink 
+							value="https://github.com/feliperodriguesprado/MyLibraries_JavaEE7" 
+							target="_blank">	
 				
-						<p:graphicImage styleClass="imageLinkGitHubAbout" value="../images/github.png"></p:graphicImage>
+							<p:graphicImage 
+								styleClass="imageLinkGitHubAbout" 
+								value="../images/github.png" />
 				
-					</h:outputLink>
+						</h:outputLink>
+				
+					</p:panel>
 				
 				</p:panel>
-				
-
-			</p:panel>
 			
-		</h:form>
+			</h:form>
 		
 		</ui:define>
 
 	</ui:composition>
-
 
 </h:body>
 </html>

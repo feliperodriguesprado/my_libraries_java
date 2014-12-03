@@ -22,4 +22,14 @@ public class Messages {
 		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail);
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
+	
+	/**
+	 * Metodo que mostra na tela uma mensagem de informação.
+	 * @param summary {@link String} - Titulo da mensagem.
+	 * @param detail {@link String} - Mensagem do erro.
+	 */
+	public void setMessageInfo(String summary, String detail) {
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
 }

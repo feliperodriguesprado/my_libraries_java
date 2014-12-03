@@ -20,7 +20,7 @@ import tk.mylibraries.orm.HibernateUtil;
  */
 @ManagedBean
 @ViewScoped
-public class EmprestimosController {
+public class EmprestimosControllerOld {
 	Emprestimo emprestimo = new Emprestimo();
 	Biblioteca biblioteca = new Biblioteca();
 	TipoBiblioteca tipo = new TipoBiblioteca();
@@ -65,7 +65,7 @@ public class EmprestimosController {
 		return biblioteca;
 	}
 
-	public EmprestimosController() {
+	public EmprestimosControllerOld() {
 		emprestimos = new EmprestimoDAO(HibernateUtil.getEntityManager())
 				.getAll();
 		emprestimo = new Emprestimo();

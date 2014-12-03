@@ -19,33 +19,51 @@
 
 			<p:menubar>
 
-				<p:menuitem value="Principal" icon="ui-icon-home" url="main.xhtml">
+				<p:menuitem 
+					value="Principal" 
+					icon="ui-icon-home" 
+					url="main.xhtml">
 				</p:menuitem>
 
-				<p:menuitem value="Bibliotecas" icon="ui-icon-pencil"
+				<p:menuitem 
+					value="Bibliotecas" 
+					icon="ui-icon-pencil"
 					url="biblioteca.xhtml">
 				</p:menuitem>
 
-				<p:menuitem value="Empréstimos" icon="ui-icon-newwin"
+				<p:menuitem 
+					value="Empréstimos" 
+					icon="ui-icon-newwin"
 					url="emprestimo.xhtml">
 				</p:menuitem>
 
-				<p:menuitem value="Sobre" icon="ui-icon-help" url="about.xhtml">
+				<p:menuitem 
+					value="Sobre" 
+					icon="ui-icon-help" 
+					url="about.xhtml">
 				</p:menuitem>
 
 				<f:facet name="options">
 					
-					<h:outputText value="Olá #{userController.currentUser}" style="margin-right:10px" placeholder="Search" />
+					<h:outputText 
+						value="Olá #{userController.currentUser}" 
+						style="margin-right:10px" 
+						placeholder="Search" />
 					
-					<p:commandButton value="Conta"
+					<p:commandButton 
+						value="Conta"
 						icon="ui-icon-extlink" />
 					
-					<p:commandButton value="Logout" update="formMenu"
-						icon="ui-icon-close" actionListener="#{userController.logout}" />	
+					<p:commandButton 
+						value="Logout" 
+						update="formMenu"
+						icon="ui-icon-close" 
+						actionListener="#{userController.logout}" />	
 				
 				</f:facet>
 
 			</p:menubar>
+			
 		</h:form>
 
 	</p:panel>
@@ -53,7 +71,6 @@
 	<ui:insert name="panelBody">
 
 	</ui:insert>
-
 
 </h:body>
 </html>
