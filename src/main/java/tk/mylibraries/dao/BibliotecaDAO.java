@@ -17,7 +17,7 @@ public class BibliotecaDAO extends GenericDAO<Biblioteca, Long> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Biblioteca> getListByUser(Usuario usuario2) {
+	public List<Biblioteca> ListByUser(Usuario usuario2) {
 		List<Biblioteca> listAll = new ArrayList<Biblioteca>();
 		try {
 			String query = "from Biblioteca b" + " where b.usuario = :usuario ";
@@ -25,7 +25,8 @@ public class BibliotecaDAO extends GenericDAO<Biblioteca, Long> {
 			q.setParameter("usuario", usuario2);
 			Object result = q.getResultList();
 			listAll = (List<Biblioteca>) result;
-
+//			System.out.println("Tamanho do listAll: " + listAll.size());
+			return listAll;
 		} catch (NoResultException e) {
 		}
 		return listAll;

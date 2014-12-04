@@ -19,8 +19,6 @@ import tk.mylibraries.utils.WebUtils;
 
 @ManagedBean
 public class BibliotecaController {
-	// Messages.getInstance().setMessageError("Erro",
-	// "E-mail ou senha incorretos!");
 
 	private Biblioteca biblioteca;
 	private BibliotecaDAO bibliotecaDAO;
@@ -48,6 +46,10 @@ public class BibliotecaController {
 
 		tipoBiblioteca = new TipoBiblioteca();
 		classificacaoBiblioteca = new ClassificacaoBiblioteca();
+		list1 = new ArrayList<Biblioteca>();
+		list2 = new ArrayList<Biblioteca>();
+		list3 = new ArrayList<Biblioteca>();
+		getTipoBibliotecaByUser();
 
 	}
 
@@ -80,15 +82,18 @@ public class BibliotecaController {
 		WebUtils webUtils = WebUtils.getInstance();
 		long idUsuario = webUtils.getIdUserSession();
 		Usuario usuario2 = usuarioDAO.getById(idUsuario);
-		listAll = bibliotecaDAO.getListByUser(usuario2);
+		listAll = bibliotecaDAO.ListByUser(usuario2);
 
 		for (Biblioteca biblioteca : listAll) {
-			if (biblioteca.getBibliotecaId() == 1) {
-				list1.add(biblioteca);
-			} else if (biblioteca.getBibliotecaId() == 2) {
-				list2.add(biblioteca);
-			} else if (biblioteca.getBibliotecaId() == 3) {
-				list3.add(biblioteca);
+			if (biblioteca != null) {
+//				System.out.println("Tipo : " + biblioteca.getTipoBiblioteca().getTipoId() + "Nome :" +biblioteca.getNome());
+				if (biblioteca.getTipoBiblioteca().getTipoId() == 1) {
+					list1.add(biblioteca);
+				} else if (biblioteca.getTipoBiblioteca().getTipoId() == 2) {
+					list2.add(biblioteca);
+				} else if (biblioteca.getTipoBiblioteca().getTipoId() == 3) {
+					list3.add(biblioteca);
+				}
 			}
 
 		}

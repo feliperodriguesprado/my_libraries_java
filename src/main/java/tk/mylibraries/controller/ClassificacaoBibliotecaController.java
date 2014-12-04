@@ -14,8 +14,6 @@ public class ClassificacaoBibliotecaController {
 
 	private ClassificacaoBiblioteca classificacaoBiblioteca;
 	private ClassificacaoBibliotecaDAO classificacaoBibliotecaDAO;
-	private String nome;
-
 	public ClassificacaoBibliotecaController() {
 		classificacaoBibliotecaDAO = new ClassificacaoBibliotecaDAO(
 				HibernateUtil.getEntityManager());
