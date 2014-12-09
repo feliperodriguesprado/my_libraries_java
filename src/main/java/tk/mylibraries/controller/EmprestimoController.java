@@ -7,9 +7,11 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 
+import tk.mylibraries.dao.BibliotecaDAO;
 import tk.mylibraries.dao.EmprestimoDAO;
 import tk.mylibraries.dao.TipoBibliotecaDAO;
 import tk.mylibraries.entities.Biblioteca;
+import tk.mylibraries.entities.Emprestimo;
 import tk.mylibraries.entities.TipoBiblioteca;
 import tk.mylibraries.orm.HibernateUtil;
 import tk.mylibraries.utils.Messages;
@@ -18,6 +20,11 @@ import tk.mylibraries.utils.WebUtils;
 @ManagedBean
 public class EmprestimoController {
 	
+	private Emprestimo emprestimo;
+	private TipoBiblioteca tipoBiblioteca;
+	private Biblioteca biblioteca;
+	private BibliotecaDAO bibliotecaDAO;
+
 	private TipoBibliotecaDAO tipoBibliotecaDAO;
 	private EmprestimoDAO emprestimoDAO;
 	
@@ -33,6 +40,9 @@ public class EmprestimoController {
 	public EmprestimoController() {
 		tipoBibliotecaDAO = new TipoBibliotecaDAO(HibernateUtil.getEntityManager());
 		emprestimoDAO = new EmprestimoDAO(HibernateUtil.getEntityManager());
+		tipoBiblioteca = new TipoBiblioteca();
+		bibliotecaDAO = new BibliotecaDAO(HibernateUtil.getEntityManager());
+		biblioteca = new Biblioteca();
 	}
 	
 	/**
@@ -95,6 +105,8 @@ public class EmprestimoController {
 	}
 	
 	public void save() {
+		emprestimoDAO.save(emprestimo);
+		System.out.println(emprestimo.getBiblioteca());
 		Messages.getInstance().setMessageInfo("Dados:", "ID tipo = " + idTypeLibrary + ", ID biblioteca = " + idLibrary);
 	}
 	
@@ -119,7 +131,9 @@ public class EmprestimoController {
 	}
 
 	public void setIdLibrary(String idLibrary) {
-		this.idLibrary = idLibrary;
+		biblioteca = bibliotecaDAO.getById(Long.parseLong(idLibrary));
+		emprestimo.setBiblioteca(biblioteca);
 	}
+	
 
 }
