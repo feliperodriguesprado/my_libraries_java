@@ -1,3 +1,6 @@
+-- DROP SCHEMA public CASCADE;
+-- CREATE SCHEMA public AUTHORIZATION postgres;
+
 
 CREATE SEQUENCE public.classificacao_biblioteca_classificacaoid_seq;
 
@@ -6,7 +9,7 @@ CREATE TABLE public.classificacao_biblioteca (
                 nome VARCHAR(30) NOT NULL,
                 CONSTRAINT classificacao_biblioteca_pk PRIMARY KEY (classificacaoid)
 );
-COMMENT ON TABLE public.classificacao_biblioteca IS 'Tabela para armazenar a classifica��o das bibliotecas. Exemplo: �timo, Muito bom, bom, ruim e p�ssimo.';
+COMMENT ON TABLE public.classificacao_biblioteca IS 'Tabela para armazenar a classificacao das bibliotecas. Exemplo: Otimo, Muito bom, Bom, Ruim e Pessimo.';
 
 
 ALTER SEQUENCE public.classificacao_biblioteca_classificacaoid_seq OWNED BY public.classificacao_biblioteca.classificacaoid;
@@ -27,12 +30,14 @@ CREATE SEQUENCE public.usuario_usuarioid_seq;
 
 CREATE TABLE public.usuario (
                 usuarioid INTEGER NOT NULL DEFAULT nextval('public.usuario_usuarioid_seq'),
+                ativo BOOLEAN NOT NULL,
                 nome VARCHAR(100) NOT NULL,
                 senha VARCHAR(32) NOT NULL,
                 email VARCHAR(100) NOT NULL,
-                CONSTRAINT pk_usuario PRIMARY KEY (usuarioid)
+                CONSTRAINT pk_usuario PRIMARY KEY (usuarioid),
+                CONSTRAINT uk_usuario UNIQUE (email)
 );
-COMMENT ON TABLE public.usuario IS 'Tabela para armazenar os usu�rios cadastrados no sistema.';
+COMMENT ON TABLE public.usuario IS 'Tabela para armazenar os usurios cadastrados no sistema.';
 
 
 ALTER SEQUENCE public.usuario_usuarioid_seq OWNED BY public.usuario.usuarioid;
@@ -48,7 +53,7 @@ CREATE TABLE public.biblioteca (
                 desejado BOOLEAN NOT NULL,
                 CONSTRAINT pk_biblioteca PRIMARY KEY (bibliotecaid)
 );
-COMMENT ON TABLE public.biblioteca IS 'Tabela que armazena o cadastro das bibliotecas por usu�rio.';
+COMMENT ON TABLE public.biblioteca IS 'Tabela que armazena o cadastro das bibliotecas por usuario.';
 
 
 ALTER SEQUENCE public.biblioteca_bibliotecaid_seq OWNED BY public.biblioteca.bibliotecaid;
@@ -65,7 +70,7 @@ CREATE TABLE public.emprestimo (
                 ativo BOOLEAN NOT NULL,
                 CONSTRAINT pk_emprestimo PRIMARY KEY (emprestimoid)
 );
-COMMENT ON TABLE public.emprestimo IS 'Tabela para armazenar os empr�stimos realizados das bibliotecas para outras pessoas.';
+COMMENT ON TABLE public.emprestimo IS 'Tabela para armazenar os emprestimos realizados das bibliotecas para outras pessoas.';
 
 
 ALTER SEQUENCE public.emprestimo_emprestimoid_seq OWNED BY public.emprestimo.emprestimoid;
