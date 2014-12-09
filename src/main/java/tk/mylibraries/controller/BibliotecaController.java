@@ -1,14 +1,17 @@
 package tk.mylibraries.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
-import javax.servlet.http.HttpSession;
 
 import tk.mylibraries.dao.BibliotecaDAO;
+import tk.mylibraries.dao.ClassificacaoBibliotecaDAO;
+import tk.mylibraries.dao.TipoBibliotecaDAO;
 import tk.mylibraries.dao.UsuarioDAO;
 import tk.mylibraries.entities.Biblioteca;
 import tk.mylibraries.entities.ClassificacaoBiblioteca;
@@ -22,55 +25,51 @@ public class BibliotecaController {
 
 	private Biblioteca biblioteca;
 	private BibliotecaDAO bibliotecaDAO;
-	private List<TipoBiblioteca> tipoBibliotecaList;
-	private TipoBiblioteca biblioteca1;
-	private TipoBiblioteca biblioteca2;
-	private TipoBiblioteca biblioteca3;
-	private List<ClassificacaoBiblioteca> classificacaoBibliotecaList;
-	private TipoBiblioteca tipoBiblioteca;
-	private ClassificacaoBiblioteca classificacaoBiblioteca;
-	private List<Biblioteca> list1;
-	private List<Biblioteca> list2;
-	private List<Biblioteca> list3;
+	private TipoBibliotecaDAO tipoBibliotecaDAO;
+	private TipoBiblioteca tipoBibliotecaTO;
+	private ClassificacaoBibliotecaDAO classificacaoBibliotecaDAO;
+	private ClassificacaoBiblioteca classificacaoBibliotecaTO;
+
+	private String idTipo;
+	private Map<String, Long> tipoLibraryMap;
+
+	private String idClassificacao;
+	private Map<String, Long> classificacaoLibraryMap;
 
 	public BibliotecaController() {
+		tipoBibliotecaDAO = new TipoBibliotecaDAO(
+				HibernateUtil.getEntityManager());
+		classificacaoBibliotecaDAO = new ClassificacaoBibliotecaDAO(
+				HibernateUtil.getEntityManager());
 		bibliotecaDAO = new BibliotecaDAO(HibernateUtil.getEntityManager());
 		biblioteca = new Biblioteca();
-		classificacaoBibliotecaList = new ClassificacaoBibliotecaController()
-				.getAll();
-		tipoBibliotecaList = new TipoBibliotecaController().getAll();
-		biblioteca1 = biblioteca2 = biblioteca3 = new TipoBiblioteca();
-		biblioteca1 = tipoBibliotecaList.get(0);
-		biblioteca2 = tipoBibliotecaList.get(1);
-		biblioteca3 = tipoBibliotecaList.get(2);
-
-		tipoBiblioteca = new TipoBiblioteca();
-		classificacaoBiblioteca = new ClassificacaoBiblioteca();
-		list1 = new ArrayList<Biblioteca>();
-		list2 = new ArrayList<Biblioteca>();
-		list3 = new ArrayList<Biblioteca>();
-		getTipoBibliotecaByUser();
+		tipoBibliotecaTO = new TipoBiblioteca();
+		classificacaoBibliotecaTO = new ClassificacaoBiblioteca();
 
 	}
 
+	@PostConstruct
+	private void init() {
+		tipoLibraryMap = new HashMap<String, Long>();
+		tipoLibraryMap.put("Livros", 1l);
+		tipoLibraryMap.put("Músicas", 2l);
+		tipoLibraryMap.put("Vídeos", 3l);
+
+		classificacaoLibraryMap = new HashMap<String, Long>();
+		classificacaoLibraryMap.put("Ótimo", 1l);
+		classificacaoLibraryMap.put("Satisfatório", 2l);
+		classificacaoLibraryMap.put("Regular", 3l);
+		classificacaoLibraryMap.put("Péssimo", 4l);
+	}
+
 	public void salvar() {
-		Biblioteca biblioteca = new Biblioteca();
-		biblioteca.setClassificacaoBiblioteca(classificacaoBiblioteca);
-		biblioteca.setDesejado(this.biblioteca.isDesejado());
-		biblioteca.setNome(this.biblioteca.getNome());
-		biblioteca.setTipoBiblioteca(tipoBiblioteca);
-
-		FacesContext context = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) context.getExternalContext()
-				.getSession(false);
-		Long userId = (Long) session.getAttribute("user");
-		EntityManager entityManager = HibernateUtil.getEntityManager();
-		UsuarioDAO usuarioDAO = new UsuarioDAO(entityManager);
-		Usuario usuario = usuarioDAO.getById(userId);
-
-		biblioteca.setUsuario(usuario);
-
+		tipoBibliotecaTO = tipoBibliotecaDAO.getById(Long.parseLong(idTipo));
+		classificacaoBibliotecaTO = classificacaoBibliotecaDAO.getById(Long
+				.parseLong(idClassificacao));
+		biblioteca.setClassificacaoBiblioteca(classificacaoBibliotecaTO);
+		biblioteca.setTipoBiblioteca(tipoBibliotecaTO);
 		bibliotecaDAO.save(biblioteca);
+
 	}
 
 	public void getTipoBibliotecaByUser() {
@@ -84,24 +83,55 @@ public class BibliotecaController {
 		Usuario usuario2 = usuarioDAO.getById(idUsuario);
 		listAll = bibliotecaDAO.ListByUser(usuario2);
 
-		for (Biblioteca biblioteca : listAll) {
-			if (biblioteca != null) {
-//				System.out.println("Tipo : " + biblioteca.getTipoBiblioteca().getTipoId() + "Nome :" +biblioteca.getNome());
-				if (biblioteca.getTipoBiblioteca().getTipoId() == 1) {
-					list1.add(biblioteca);
-				} else if (biblioteca.getTipoBiblioteca().getTipoId() == 2) {
-					list2.add(biblioteca);
-				} else if (biblioteca.getTipoBiblioteca().getTipoId() == 3) {
-					list3.add(biblioteca);
-				}
-			}
-
-		}
+		// for (Biblioteca biblioteca : listAll) {
+		// if (biblioteca != null) {
+		// // System.out.println("Tipo : " +
+		// // biblioteca.getTipoBiblioteca().getTipoId() + "Nome :"
+		// // +biblioteca.getNome());
+		// if (biblioteca.getTipoBiblioteca().getTipoId() == 1) {
+		// list1.add(biblioteca);
+		// } else if (biblioteca.getTipoBiblioteca().getTipoId() == 2) {
+		// list2.add(biblioteca);
+		// } else if (biblioteca.getTipoBiblioteca().getTipoId() == 3) {
+		// list3.add(biblioteca);
+		// }
+		// }
+		//
+		// }
 
 	}
 
-	public List<Biblioteca> getAll() {
-		return bibliotecaDAO.getAll();
+	public Map<String, Long> getTipoLibraryMap() {
+		return tipoLibraryMap;
+	}
+
+	public void setTipoLibraryMap(Map<String, Long> tipoLibraryMap) {
+		this.tipoLibraryMap = tipoLibraryMap;
+	}
+
+	public String getIdClassificacao() {
+		return idClassificacao;
+	}
+
+	public void setIdClassificacao(String idClassificacao) {
+		this.idClassificacao = idClassificacao;
+	}
+
+	public Map<String, Long> getClassificacaoLibraryMap() {
+		return classificacaoLibraryMap;
+	}
+
+	public void setClassificacaoLibraryMap(
+			Map<String, Long> classificacaoLibraryMap) {
+		this.classificacaoLibraryMap = classificacaoLibraryMap;
+	}
+
+	public String getIdTipo() {
+		return idTipo;
+	}
+
+	public void setIdTipo(String idTipo) {
+		this.idTipo = idTipo;
 	}
 
 	public void atualizar() {
@@ -128,61 +158,29 @@ public class BibliotecaController {
 		biblioteca.setDesejado(desejado);
 	}
 
-	public TipoBiblioteca getTipoBiblioteca() {
-		return tipoBiblioteca;
-	}
-
-	public void setTipoBiblioteca(TipoBiblioteca tipoBiblioteca) {
-		this.tipoBiblioteca = tipoBiblioteca;
-	}
-
-	public ClassificacaoBiblioteca getClassificacaoBiblioteca() {
-		return classificacaoBiblioteca;
-	}
-
-	public void setClassificacaoBiblioteca(
-			ClassificacaoBiblioteca classificacaoBiblioteca) {
-		this.classificacaoBiblioteca = classificacaoBiblioteca;
-	}
-
-	public List<TipoBiblioteca> getTipoBibliotecaList() {
-		return tipoBibliotecaList;
-	}
-
-	public List<ClassificacaoBiblioteca> getClassificacaoBibliotecaList() {
-		return classificacaoBibliotecaList;
-	}
-
-	public List<Biblioteca> getList1() {
-		return list1;
-	}
-
-	public List<Biblioteca> getList2() {
-		return list2;
-	}
-
-	public List<Biblioteca> getList3() {
-		return list3;
-	}
-
-	public TipoBiblioteca getBiblioteca1() {
-		return biblioteca1;
-	}
-
-	public TipoBiblioteca getBiblioteca2() {
-		return biblioteca2;
-	}
-
-	public TipoBiblioteca getBiblioteca3() {
-		return biblioteca3;
-	}
-
 	public Biblioteca getBiblioteca() {
 		return biblioteca;
 	}
 
 	public void setBiblioteca(Biblioteca biblioteca) {
 		this.biblioteca = biblioteca;
+	}
+
+	public TipoBiblioteca getTipoBibliotecaTO() {
+		return tipoBibliotecaTO;
+	}
+
+	public void setTipoBibliotecaTO(TipoBiblioteca tipoBibliotecaTO) {
+		this.tipoBibliotecaTO = tipoBibliotecaTO;
+	}
+
+	public ClassificacaoBiblioteca getClassificacaoBibliotecaTO() {
+		return classificacaoBibliotecaTO;
+	}
+
+	public void setClassificacaoBibliotecaTO(
+			ClassificacaoBiblioteca classificacaoBibliotecaTO) {
+		this.classificacaoBibliotecaTO = classificacaoBibliotecaTO;
 	}
 
 }
