@@ -13,11 +13,13 @@ import tk.mylibraries.utils.WebUtils;
 public class IndexController {
 	
 	private UsuarioDAO usuarioDAO;
+	Usuario usuario;
 	private String email;
 	private String password;
 	
 	public IndexController() {
 		usuarioDAO = new UsuarioDAO(HibernateUtil.getEntityManager());
+		usuario = new Usuario();
 	}
 	
 	public void checkLogin(ActionEvent actionEvent) {
@@ -30,15 +32,26 @@ public class IndexController {
 			return;
 		}
 	    
-		Usuario usuario = usuarioDAO.getUsuarioByEmail(email);
+		usuario = usuarioDAO.getUsuarioByEmail(email);
 		
 		if (usuario != null) {
+			
 			if (usuarioDAO.checkPasswordUser(usuario, password)) {
+				
+				if (!usuario.isAtivo()) {
+					WebUtils.getInstance().getRequestContext().execute("PF('activeAccount').show();");
+					return;
+				}
+				
 				WebUtils.getInstance().setSession(usuario);
 				WebUtils.getInstance().redirectPage("app/main.xhtml");
 			}
 		}
 		Messages.getInstance().setMessageError("Erro", "E-mail ou senha incorretos!");
+	}
+	
+	public void activeAccount() {
+		WebUtils.getInstance().redirectPage("userRegister.xhtml");
 	}
 	
 	public void setEmail(String email) {

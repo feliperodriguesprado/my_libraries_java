@@ -32,4 +32,14 @@ public class Messages {
 		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
+	
+	public void setMessageErrorDialog(String summary, String detail) {
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail);
+		WebUtils.getInstance().getRequestContext().showMessageInDialog(msg);
+	}
+	
+	public void setMessageInfoDialog(String summary, String detail) {
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+		WebUtils.getInstance().getRequestContext().showMessageInDialog(msg);
+	}
 }

@@ -5,6 +5,8 @@ import java.io.IOException;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.primefaces.context.RequestContext;
+
 import tk.mylibraries.entities.Usuario;
 
 public class WebUtils {
@@ -27,6 +29,10 @@ public class WebUtils {
 	public FacesContext getFacesContext() {  
         return FacesContext.getCurrentInstance();  
     }
+	
+	public RequestContext getRequestContext() {
+		return RequestContext.getCurrentInstance();
+	}
 	
 	/**
 	 * Metodo que obtem a sessao do browser.

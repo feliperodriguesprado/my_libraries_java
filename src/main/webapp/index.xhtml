@@ -42,6 +42,46 @@
 			
 			</p:panel>
 		
+			<!-- Dialog para ativar usuário existente. -->
+			<p:dialog 
+				id="dialogActiveAccount" 
+				header="Conta do usuário" 
+				widgetVar="activeAccount" 
+				modal="true"
+				resizable="false"
+				height="212" width="370" >
+				
+				<h:form id="formActiveAccount">
+				
+					<p:panel style="border:none;">
+					
+						<p:outputLabel 
+							value="Conta desativada. Deseja ser redirecionado para a tela de cadastro de conta para ativar sua conta? Para ativar sua conta informe seu usuário e senha e a confirmação da senha." />
+						
+						<p:panel 
+							style="margin-top: 15px; border:none	" >
+						
+						<p:commandButton  
+							value="Sim"
+							update="formActiveAccount" 
+							icon="ui-icon-check"
+							action="#{indexController.activeAccount}" />
+
+						<p:commandButton 
+							value="Não"
+							icon="ui-icon-close"
+							type="button" 
+							onclick="PF('activeAccount').hide();" />				
+						
+						</p:panel>
+						
+					
+					</p:panel>	
+				
+				</h:form>
+			
+			</p:dialog>
+		
 		</h:form>
 		
 		<p:panel styleClass="panelLogo">

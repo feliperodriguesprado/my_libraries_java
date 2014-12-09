@@ -25,6 +25,9 @@ public class Usuario implements Serializable {
 	@SequenceGenerator(name = "usuario_usuarioid_seq", sequenceName = "usuario_usuarioid_seq", allocationSize = 1)
 	private Long usuarioId;
 
+	@Column(name = "ativo", nullable = false)
+	private boolean ativo;
+	
 	@Column(name = "nome", nullable = false, length = 100)
 	private String nome;
 
@@ -43,6 +46,14 @@ public class Usuario implements Serializable {
 
 	public void setUsuarioId(Long usuarioid) {
 		this.usuarioId = usuarioid;
+	}
+	
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	public String getNome() {

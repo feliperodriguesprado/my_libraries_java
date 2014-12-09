@@ -16,7 +16,14 @@ public class UserRegisterController {
 
 	private UsuarioDAO usuarioDAO;
 	private Usuario usuario;
+	private Usuario userExists;
 	private String confirmSenha;
+	
+	public UserRegisterController() {
+		usuarioDAO = new UsuarioDAO(HibernateUtil.getEntityManager());
+		usuario = new Usuario();
+		userExists = new Usuario();
+	}
 	
 	public void saveUser() {
 		
@@ -33,20 +40,50 @@ public class UserRegisterController {
 		
 		if (usuario.getSenha().equals(confirmSenha)) {
 			usuario.setSenha(EncryptionMD5.getInstance().getPasswordEncryptionMD5(usuario.getSenha()));
-			usuarioDAO.save(usuario);
-			WebUtils.getInstance().setSession(usuario);
-			WebUtils.getInstance().redirectPage("app/main.xhtml");
+			usuario.setAtivo(true);
+			
+			userExists = usuarioDAO.getUsuarioByEmail(usuario.getEmail());
+		
+			if (userExists != null) {
+				
+				if (userExists.isAtivo() == true) {
+					WebUtils.getInstance().getRequestContext().execute("PF('existsAccount').show();");
+					return;
+				} else if (userExists.getSenha().equals(usuario.getSenha()) && !userExists.isAtivo()) {
+					WebUtils.getInstance().getRequestContext().execute("PF('activeAccount').show();");
+					return;
+				} else if (!userExists.getSenha().equals(usuario.getSenha()) && !userExists.isAtivo()) {
+					WebUtils.getInstance().getRequestContext().execute("PF('accountExistsPass').show();");
+					return;
+				}
+			} else {
+				usuarioDAO.save(usuario);
+				WebUtils.getInstance().setSession(usuario);
+				WebUtils.getInstance().redirectPage("app/main.xhtml");				
+			}
 		} else {
 			FacesMessage msg = new FacesMessage(
 					FacesMessage.SEVERITY_ERROR, "Erro:",
 					"A senha informada e a confirmação da senha não são iguais");
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 		}
+		
 	}
 	
-	public UserRegisterController() {
-		usuarioDAO = new UsuarioDAO(HibernateUtil.getEntityManager());
-		usuario = new Usuario();
+	public void redirectAccountExists() {
+		WebUtils.getInstance().redirectPage("index.xhtml");
+	}
+	
+	public void activeAccount() {
+		
+		userExists = usuarioDAO.getUsuarioByEmail(usuario.getEmail());
+		
+		if (userExists != null) {
+			userExists.setAtivo(true);
+			usuarioDAO.update(userExists);
+		}
+		
+		WebUtils.getInstance().redirectPage("index.xhtml");
 	}
 	
 	public String getName() {

@@ -28,28 +28,28 @@ h2 {
 .panelMain {
 	background-color: white;
     border: 1px solid #bdbdbd;
-    height: 495px;
+    height: 480px;
     margin: 30px auto;
     padding: 30px;
-    width: 680px;
+    width: 670px;
 }
 
 .panelRegister {
 	background-color: #F5F5F5;
     border: 1px solid #bdbdbd;
     float: left;
-    height: 320px;
+    height: 310px;
     margin-top: 30px;
     padding: 15px;
-    width: 280px;
+    width: 282px;
 }
 
 .panelLogo {
     background-repeat: no-repeat;
     float: right;
-    height: 320px;
-    margin-top: 50px;
-    width: 310px;
+    height: 250px;
+    margin-top: 40px;
+    width: 290px;
     border:none;
 }
 

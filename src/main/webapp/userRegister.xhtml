@@ -49,11 +49,111 @@
 					icon="ui-icon-check"
 					action="#{userRegisterController.saveUser}" />
 				
-				<p:link styleClass="button linkBack" value="Cancelar" href="index.xhtml" />
+				<p:link 
+					styleClass="button linkBack" 
+					value="Cancelar" 
+					href="index.xhtml" />
 				
 				<p:growl id="msgs" showDetail="true" />
 			
 			</p:panel>
+			
+			<!-- Dialog para usuario ja cadastrado ativado -->
+			<p:dialog 
+				id="dialogExistsAccount" 
+				header="Conta do usuário" 
+				widgetVar="existsAccount" 
+				modal="true"
+				resizable="false"
+				height="175" width="320" >
+				
+					<p:panel style="border:none;">
+					
+						<p:outputLabel 
+							value="Usuário já cadastrado! Por favor, realize o login. Você deseja ser redirecionado para a página de login?" />
+						
+						<p:panel 
+							style="margin-top: 15px; border:none" >			
+						
+							<p:commandButton
+								value="Sim"
+								icon="ui-icon-check"
+								action="#{userRegisterController.redirectAccountExists}" />
+
+							<p:commandButton 
+								value="Não"
+								icon="ui-icon-close"
+								type="button" 
+								onclick="PF('existsAccount').hide();" />
+						
+						</p:panel>
+					
+					</p:panel>	
+			
+			</p:dialog>
+			
+			<!-- Dialog para usuario ja cadastrado e desativado com a senha informada corretamente -->
+			<p:dialog 
+				id="dialogActiveAccount" 
+				header="Conta do usuário" 
+				widgetVar="activeAccount" 
+				modal="true"
+				resizable="false"
+				height="195" width="320" >
+				
+					<p:panel style="border:none;">
+					
+						<p:outputLabel 
+							value="Conta desativada. Deseja ativar sua conta? Após ativar sua conta, você será redirecionado para a página de login." />
+						
+						<p:panel 
+							style="margin-top: 15px; border:none" >
+						
+						<p:commandButton  
+							value="Sim"
+							icon="ui-icon-check"
+							actionListener="#{userRegisterController.activeAccount}" />
+
+						<p:commandButton 
+							value="Não"
+							icon="ui-icon-close"
+							type="button" 
+							onclick="PF('activeAccount').hide();" />				
+						
+						</p:panel>
+						
+					</p:panel>	
+					
+			</p:dialog>
+			
+			<!-- Dialog para usuario ja cadastrado e desativado com a senha informada incorretamente -->
+			<p:dialog 
+				id="dialogExistsAccountPass" 
+				header="Conta do usuário" 
+				widgetVar="accountExistsPass" 
+				modal="true"
+				resizable="false"
+				height="175" width="310" >
+				
+					<p:panel style="border:none;">
+					
+						<p:outputLabel 
+							value="Usuário desativado! Por favor, informe corretamente a senha e a confirmação da senha para ativar sua conta" />
+						
+						<p:panel 
+							style="margin-top: 15px; border:none	" >
+
+						<p:commandButton 
+							value="Ok"
+							icon="ui-icon-close"
+							type="button" 
+							onclick="PF('accountExistsPass').hide();" />
+						
+						</p:panel>
+						
+					</p:panel>	
+			
+			</p:dialog>
 		
 		</h:form>
 		

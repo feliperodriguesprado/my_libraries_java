@@ -8,8 +8,9 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>MyLibraries</title>
-	<link rel="shortcut icon" href="../images/logo.ico" type="image/x-icon"/>
+	<link rel="shortcut icon" href="../images/logo.ico" type="image/x-icon" />
 	<link rel="stylesheet" href="../css/styleAbout.css"></link>
+	<link rel="stylesheet" href="../css/styleUserAccount.css"></link>
 </h:head>
 <h:body>
 
@@ -19,54 +20,117 @@
 
 			<p:menubar>
 
-				<p:menuitem 
-					value="Principal" 
-					icon="ui-icon-home" 
-					url="main.xhtml">
+				<p:menuitem value="Principal" icon="ui-icon-home" url="main.xhtml">
 				</p:menuitem>
 
-				<p:menuitem 
-					value="Bibliotecas" 
-					icon="ui-icon-pencil"
+				<p:menuitem value="Bibliotecas" icon="ui-icon-pencil"
 					url="biblioteca.xhtml">
 				</p:menuitem>
 
-				<p:menuitem 
-					value="Empréstimos" 
-					icon="ui-icon-newwin"
+				<p:menuitem value="Empréstimos" icon="ui-icon-newwin"
 					url="emprestimo.xhtml">
 				</p:menuitem>
 
-				<p:menuitem 
-					value="Sobre" 
-					icon="ui-icon-help" 
-					url="about.xhtml">
+				<p:menuitem value="Sobre" icon="ui-icon-help" url="about.xhtml">
 				</p:menuitem>
 
 				<f:facet name="options">
-					
-					<h:outputText 
-						value="Olá #{userController.currentUser}" 
-						style="margin-right:10px" 
-						placeholder="Search" />
-					
-					<p:commandButton 
-						value="Conta"
-						icon="ui-icon-extlink" />
-					
-					<p:commandButton 
-						value="Logout" 
-						update="formMenu"
-						icon="ui-icon-close" 
-						actionListener="#{userController.logout}" />	
-				
+
+					<h:outputText value="Olá #{userController.currentUser}"
+						style="margin-right:10px" placeholder="Search" />
+
+					<p:commandButton value="Conta" icon="ui-icon-extlink" type="button"
+						onclick="PF('account').show();" />
+
+					<p:commandButton value="Logout" update="formMenu"
+						icon="ui-icon-close" actionListener="#{userController.logout}" />
+
 				</f:facet>
 
 			</p:menubar>
-			
+
 		</h:form>
 
 	</p:panel>
+	
+	<!-- Dialog de alteracao da conta do usuario -->
+
+			<p:dialog id="dialogAccount" header="Conta do usuário" widgetVar="account" modal="true"
+			resizable="false"
+				height="480" width="680">
+
+				<h:form id="formRegistrationId" styleClass="formRegistration">
+
+					<p:panel styleClass="panelRegister">
+
+						<h2>Dados do usuário</h2>
+
+						<p:inputText id="inputTextName" styleClass="input"
+							value="#{userController.name}"></p:inputText>
+						<p:watermark for="inputTextName" value="Nome ou apelido" />
+
+						<p:inputText id="inputTextEmail" styleClass="input"
+							value="#{userController.email}"></p:inputText>
+						<p:watermark for="inputTextEmail" value="E-mail" />
+
+						<p:password
+							id="inputPasswordCurrent" 
+							styleClass="input"
+							value="#{userController.passwordCurrent}" 
+							placeholder="Informe sua senha atual" />
+
+						<p:password 
+							id="inputPassword" 
+							styleClass="input"
+							value="#{userController.passwordNew}" />
+						<p:watermark for="inputPassword" value="Nova senha" />
+
+						<p:password id="inputTextConfirmPassword" styleClass="input"
+							value="#{userController.passwordConfirm}">
+						</p:password>
+						<p:watermark for="inputTextConfirmPassword"
+							value="Confirme a senha" />
+
+						<p:commandButton 
+							styleClass="button" 
+							value="Salvar"
+							update="@(form)"
+							icon="ui-icon-check"
+							action="#{userController.updateUser}" />
+
+						<p:commandButton 
+							styleClass="button" 
+							value="Excluir"
+							update="@(form)"
+							icon="ui-icon-close"
+							action="#{userController.inactivateUser}" >
+							<p:confirm 
+								header="Confirmação" 
+								message="Tem certeza que deseja excluir sua conta?" 
+								icon="ui-icon-alert" />
+						</p:commandButton>
+
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+        					<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        					<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+    					</p:confirmDialog>
+
+						<p:commandLink
+							styleClass="linkBack"
+							value="Cancelar"
+						 	onclick="PF('account').hide();" />
+
+					</p:panel>
+
+				</h:form>
+
+				<p:panel styleClass="panelLogo">
+
+					<p:graphicImage value="../images/logoLogin.png"></p:graphicImage>
+
+				</p:panel>
+
+			</p:dialog>
 
 	<ui:insert name="panelBody">
 
