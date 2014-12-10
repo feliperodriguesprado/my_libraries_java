@@ -35,7 +35,7 @@ public class Runner {
 		list2 = tipoBibliotecaDAO.getAll();
 		tipoBiblioteca = list2.get(1);
 		
-		bb.setClassificacaoBiblioteca(classificacaoBiblioteca);
+//		bb.setClassificacaoBiblioteca(classificacaoBiblioteca);
 //		bb.setTipoBiblioteca(tipoBiblioteca);
 		bb.setNome("Corrida Mortal");
 		bb.setDesejado(true);

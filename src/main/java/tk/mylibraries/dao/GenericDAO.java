@@ -17,7 +17,7 @@ public class GenericDAO<T, PK> {
 	public GenericDAO(EntityManager em) {
 		this.em = em;
 	}
-
+	
 	public void save(T entity) {
 		em.getTransaction().begin();
 		em.persist(entity);
