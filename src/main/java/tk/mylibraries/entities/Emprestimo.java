@@ -24,20 +24,20 @@ public class Emprestimo implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "emprestimo_emprestimoid_seq")
 	@SequenceGenerator(name = "emprestimo_emprestimoid_seq", sequenceName = "emprestimo_emprestimoid_seq", allocationSize = 1)
 	private Long emprestimoId;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "bibliotecaid")
 	private Biblioteca biblioteca;
-	@Column(name = "data_emprestimo", nullable = false)
+	@Column(name = "data_emprestimo", nullable = true)
 	@Temporal(TemporalType.DATE)
 	private Date dataEmprestimo;
-	@Column(name = "data_encerramento", nullable = false)
+	@Column(name = "data_encerramento", nullable = true)
 	@Temporal(TemporalType.DATE)
 	private Date dataEncerramento;
-	@Column(name = "destinatario", nullable = false, length = 100)
+	@Column(name = "destinatario", nullable = true, length = 100)
 	private String destinatario;
 	@Column(name = "observacao", length = 200)
 	private String observacao;
-	@Column(name = "ativo", nullable = false)
+	@Column(name = "ativo", nullable = true)
 	private Boolean ativo;
 
 	public Long getEmprestimoId() {

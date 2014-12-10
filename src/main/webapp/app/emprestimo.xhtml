@@ -52,32 +52,76 @@
 
 					</p:selectOneMenu>
 
-					<p:inputText id="destinatario"></p:inputText>
+					<p:inputText id="destinatario"
+						value="#{emprestimoController.destinatario}"></p:inputText>
 					<p:watermark for="destinatario" value="Para quem irá emprestar?"></p:watermark>
 
-					<p:calendar id="dataEmprestimo" mode="popup"></p:calendar>
+					<p:calendar id="dataEmprestimo" mode="popup"
+						value="#{emprestimoController.dataEmprestimo}"></p:calendar>
 					<p:watermark for="dataEmprestimo" value="Data de emprestimo"></p:watermark>
 
-					<p:inputTextarea id="observacao"></p:inputTextarea>
+					<p:inputTextarea id="observacao"
+						value="#{emprestimoController.observacao}"></p:inputTextarea>
 					<p:watermark for="observacao" value="Alguma observação?"></p:watermark>
 
-					<p:commandButton value="Salvar" update="msg"
-						actionListener="#{emprestimoController.save}" icon="ui-icon-check" />
 
+
+					<p:commandButton value="Salvar"
+						action="#{emprestimoController.save}" icon="ui-icon-check"></p:commandButton>
 				</h:form>
+
 			</p:panel>
 
 			<p:scrollPanel>
 				<h:form id="formPanel">
-					<p:dataTable var="lista1">
+					<br />
+					<h:outputText value="Livros Emprestados"></h:outputText>
+					<p:dataTable var="listaEmprestimoL"
+						value="#{emprestimoController.listaEmprestimoL}">
 						<p:column headerText="Nome biblioteca">
-							<h:outputText />
+							<h:outputText value="#{listaEmprestimoL.biblioteca.nome}" />
 						</p:column>
 						<p:column headerText="Para quem?">
-							<h:outputText />
+							<h:outputText value="#{listaEmprestimoL.destinatario}" />
 						</p:column>
 						<p:column headerText="Data emprestimo">
+							<h:outputText value="#{listaEmprestimoL.dataEmprestimo}" />
+						</p:column>
+						<p:column headerText="Açoes">
 							<h:outputText />
+						</p:column>
+					</p:dataTable>
+					
+					<br />
+					<h:outputText value="Musicas Emprestadas"></h:outputText>
+					<p:dataTable var="listaEmprestimoM"
+						value="#{emprestimoController.listaEmprestimoM}">
+						<p:column headerText="Nome biblioteca">
+							<h:outputText value="#{listaEmprestimoM.biblioteca.nome}" />
+						</p:column>
+						<p:column headerText="Para quem?">
+							<h:outputText value="#{listaEmprestimoM.destinatario}" />
+						</p:column>
+						<p:column headerText="Data emprestimo">
+							<h:outputText value="#{listaEmprestimoM.dataEmprestimo}" />
+						</p:column>
+						<p:column headerText="Açoes">
+							<h:outputText />
+						</p:column>
+					</p:dataTable>
+
+					<br />
+					<h:outputText value="Videos Emprestados"></h:outputText>
+					<p:dataTable var="listaEmprestimoV"
+						value="#{emprestimoController.listaEmprestimoV}">
+						<p:column headerText="Nome biblioteca">
+							<h:outputText value="#{listaEmprestimoV.biblioteca.nome}" />
+						</p:column>
+						<p:column headerText="Para quem?">
+							<h:outputText value="#{listaEmprestimoV.destinatario}" />
+						</p:column>
+						<p:column headerText="Data emprestimo">
+							<h:outputText value="#{listaEmprestimoV.dataEmprestimo}" />
 						</p:column>
 						<p:column headerText="Açoes">
 							<h:outputText />
