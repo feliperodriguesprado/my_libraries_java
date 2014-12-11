@@ -22,9 +22,8 @@
 
 				<h:form id="formCadastro">
 					<p:messages autoUpdate="true" />
-					<h:outputText value="Nome:"></h:outputText>
-					<p:inputText id="inputTextNameLib" styleClass="input"
-						value="#{bibliotecaController.nome}">
+					<p:inputText id="inputTextNameLib" placeholder="Nome"
+						styleClass="input" value="#{bibliotecaController.nome}">
 
 					</p:inputText>
 
@@ -49,174 +48,185 @@
 						value="Adicionar à minha lista de bibliotecas desejadas" />
 
 					<p:commandButton value="Salvar"
-						action="#{bibliotecaController.salvar}" />
+						action="#{bibliotecaController.salvar}" update="@(form)"/>
 
 				</h:form>
 
 			</p:panel>
-<!-- 			<p:scrollPanel> -->
+			<p:panel>
 
-<!-- 				<h:outputText>Bibliotecas desejadas</h:outputText> -->
-<!-- 				<br /> -->
-<!-- 				<h:form id="formPanel"> -->
-<!-- 					<br /> -->
-<!-- 					<c:if test="#{bibliotecaController.list1.size() > 0}"> -->
-<!-- 						<h:outputText value="#{bibliotecaController.biblioteca1.nome}"></h:outputText> -->
-<!-- 						<p:dataTable var="lista1" value="#{bibliotecaController.list1}"> -->
-
-
-<!-- 							<p:column headerText="Nome"> -->
-
-<!-- 								<h:outputText value="#{lista1.nome}" /> -->
-<!-- 							</p:column> -->
-<!-- 							<p:column headerText="Classificação"> -->
-
-<!-- 								<h:outputText value="#{lista1.classificacaoBiblioteca.nome}" /> -->
-<!-- 							</p:column> -->
-<!-- 							<p:column headerText="Desejada"> -->
-
-<!-- 								<p:selectBooleanCheckbox -->
-<!-- 									value="#{bibliotecaController.desejado}" disabled="true"></p:selectBooleanCheckbox> -->
-<!-- 							</p:column> -->
-<!-- 							<p:column headerText="Ações"> -->
-<!-- 								<p:commandLink title="Alterar" update=":formAlterar:Alterar" -->
-<!-- 									oncomplete="dialogAlterar.show()" immediate="true"> -->
-<!-- 									<p:graphicImage value="/images/editar.png" /> -->
-<!-- 									<f:setPropertyActionListener -->
-<!-- 										target="#{bibliotecaController.biblioteca}" value="#{lista1}" /> -->
-<!-- 								</p:commandLink> -->
-<!-- 								<p:commandLink title="Excluir" update=":formExcluir:Excluir" -->
-<!-- 									oncomplete="confirmation.show()" immediate="true"> -->
-<!-- 									<p:graphicImage value="/images/excluir.png" /> -->
-<!-- 									<f:setPropertyActionListener -->
-<!-- 										target="#{bibliotecaController.biblioteca}" value="#{lista1}" /> -->
-<!-- 								</p:commandLink> -->
-<!-- 							</p:column> -->
-
-<!-- 						</p:dataTable> -->
+				<h:outputText value="Bibliotecas desejadas" />
+				<br />
+				<h:form id="formPanel">
+					<br />
+					<c:if test="#{bibliotecaController.list1.size() > 0}">
+						<h:outputText value="#{bibliotecaController.biblioteca1.nome}"></h:outputText>
+						<p:dataTable var="lista1" value="#{bibliotecaController.list1}">
 
 
-<!-- 					</c:if> -->
-<!-- 					<br /> -->
-<!-- 					<c:if test="#{bibliotecaController.list2.size() > 0}"> -->
+							<p:column headerText="Nome">
 
-<!-- 						<h:outputText value="#{bibliotecaController.biblioteca2.nome}"></h:outputText> -->
-<!-- 						<p:dataTable var="lista2" value="#{bibliotecaController.list2}"> -->
+								<h:outputText value="#{lista1.nome}" />
+							</p:column>
+							<p:column headerText="Classificação">
 
+								<h:outputText value="#{lista1.classificacaoBiblioteca.nome}" />
+							</p:column>
+							<p:column headerText="Desejada">
 
-<!-- 							<p:column headerText="Nome"> -->
+								<p:selectBooleanCheckbox
+									value="#{bibliotecaController.desejado}" disabled="true" />
+							</p:column>
+							<p:column headerText="Ações">
 
-<!-- 								<h:outputText value="#{lista2.nome}" /> -->
-<!-- 							</p:column> -->
-<!-- 							<p:column headerText="Classificação"> -->
+								<p:commandLink title="Alterar" update="@(form)"
+									onclick="PF('dialogAlterar').show();">
+									<p:graphicImage value="/images/editar.png" />
+									<!-- 									<c:set target="#{bibliotecaController.biblioteca}" value="#{lista1}" /> -->
+									<f:setPropertyActionListener
+										target="#{bibliotecaController.biblioteca}" value="#{lista1}" />
 
-<!-- 								<h:outputText value="#{lista2.classificacaoBiblioteca.nome}" /> -->
-<!-- 							</p:column> -->
-<!-- 							<p:column headerText="Desejada"> -->
-
-<!-- 								<p:selectBooleanCheckbox -->
-<!-- 									value="#{bibliotecaController.desejado}"></p:selectBooleanCheckbox> -->
-<!-- 							</p:column> -->
-<!-- 							<p:column headerText="Ações"> -->
-<!-- 								<p:commandLink title="Alterar" update=":formAlterar:Alterar" -->
-<!-- 									oncomplete="dialogAlterar.show()" immediate="true"> -->
-<!-- 									<p:graphicImage value="/images/editar.png" /> -->
-<!-- 									<f:setPropertyActionListener -->
-<!-- 										target="#{bibliotecaController.biblioteca}" value="#{lista2}" /> -->
-<!-- 								</p:commandLink> -->
-<!-- 								<p:commandLink title="Excluir" update=":formExcluir:Excluir" -->
-<!-- 									oncomplete="confirmation.show()" immediate="true"> -->
-<!-- 									<p:graphicImage value="/images/excluir.png" /> -->
-<!-- 									<f:setPropertyActionListener -->
-<!-- 										target="#{bibliotecaController.biblioteca}" value="#{lista2}" /> -->
-<!-- 								</p:commandLink> -->
-<!-- 							</p:column> -->
-<!-- 						</p:dataTable> -->
-<!-- 					</c:if> -->
+								</p:commandLink>
 
 
-<!-- 					<br /> -->
-<!-- 					<c:if test="#{bibliotecaController.list3.size() > 0}"> -->
-
-<!-- 						<h:outputText value="#{bibliotecaController.biblioteca3.nome}"></h:outputText> -->
-<!-- 						<p:dataTable var="lista3" value="#{bibliotecaController.list3}"> -->
 
 
-<!-- 							<p:column headerText="Nome"> -->
 
-<!-- 								<h:outputText value="#{lista3.nome}" /> -->
-<!-- 							</p:column> -->
-<!-- 							<p:column headerText="Classificação"> -->
-
-<!-- 								<h:outputText value="#{lista3.classificacaoBiblioteca.nome}" /> -->
-<!-- 							</p:column> -->
-<!-- 							<p:column headerText="Desejada"> -->
-
-<!-- 								<p:selectBooleanCheckbox -->
-<!-- 									value="#{bibliotecaController.desejado}"></p:selectBooleanCheckbox> -->
-<!-- 							</p:column> -->
-<!-- 							<p:column headerText="Ações"> -->
-<!-- 								<p:commandLink title="Alterar" update=":formAlterar:Alterar" -->
-<!-- 									oncomplete="dialogAlterar.show()" immediate="true"> -->
-<!-- 									<p:graphicImage value="/images/editar.png" /> -->
-<!-- 									<f:setPropertyActionListener -->
-<!-- 										target="#{bibliotecaController.biblioteca}" value="#{lista3}" /> -->
-<!-- 								</p:commandLink> -->
-<!-- 								<p:commandLink title="Excluir" update=":formExcluir:Excluir" -->
-<!-- 									oncomplete="confirmation.show()" immediate="true"> -->
-<!-- 									<p:graphicImage value="/images/excluir.png" /> -->
-<!-- 									<f:setPropertyActionListener -->
-<!-- 										target="#{bibliotecaController.biblioteca}" value="#{lista3}" /> -->
-<!-- 								</p:commandLink> -->
-<!-- 							</p:column> -->
-<!-- 						</p:dataTable> -->
-<!-- 					</c:if> -->
-<!-- 				</h:form> -->
-<!-- 			</p:scrollPanel> -->
+								<p:commandLink title="Excluir" update="@(form)"
+									action="#{bibliotecaController.deletar}">
+									<p:graphicImage value="/images/excluir.png" />
+									<f:setPropertyActionListener
+										target="#{bibliotecaController.biblioteca}" value="#{lista1}" />
+									<p:confirm header="Confirmação"
+										message="Tem certeza que deseja excluir essa biblioteca?"
+										icon="ui-icon-alert" />
+								</p:commandLink>
 
 
-<!-- 			<h:form id="formAlterar"> -->
-<!-- 				<p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true" -->
-<!-- 					id="Alterar"> -->
-<!-- 					<p:panelGrid id="panelAlterar" columns="2"> -->
-<!-- 						<h:outputText value="Nome:" /> -->
-<!-- 						<p:inputText value="#{bibliotecaController.nome}" /> -->
+							</p:column>
 
-<!-- 						<p:selectOneMenu id="tipo" -->
-<!-- 							value="#{bibliotecaController.tipoBiblioteca}"> -->
-<!-- 							<f:selectItem itemLabel="Escolha o tipo da biblioteca" -->
-<!-- 								itemValue="#{bibliotecaController.biblioteca.tipoBiblioteca}" /> -->
-<!-- 							<f:selectItems value="#{bibliotecaController.tipoBibliotecaList}" /> -->
-<!-- 						</p:selectOneMenu> -->
+						</p:dataTable>
 
-<!-- 						<p:selectOneMenu id="classificacao" -->
-<!-- 							value="#{bibliotecaController.biblioteca.classificacaoBiblioteca}"> -->
-<!-- 							<f:selectItem itemLabel="Escolha a classificação da biblioteca" -->
-<!-- 								itemValue="#{bibliotecaController.biblioteca.classificacaoBiblioteca}" /> -->
-<!-- 							<f:selectItems -->
-<!-- 								value="#{bibliotecaController.classificacaoBibliotecaList}" /> -->
-<!-- 						</p:selectOneMenu> -->
-<!-- 					</p:panelGrid> -->
-<!-- 					<p:commandButton value="Alterar" -->
-<!-- 						actionListener="#{bibliotecaController.atualizar}" -->
-<!-- 						update=":formPanel" oncomplete="dialogAlterar.hide()" /> -->
-<!-- 				</p:dialog> -->
-<!-- 			</h:form> -->
 
-<!-- 			<h:form id="formExcluir"> -->
-<!-- 				<p:confirmDialog id="Excluir" -->
-<!-- 					message="Você gostaria de Deletar a mídia #{bibliotecaController.biblioteca.nome}?" -->
-<!-- 					header="Excluir" severity="alert" widgetVar="confirmation"> -->
+					</c:if>
+					<br />
+					<c:if test="#{bibliotecaController.list2.size() > 0}">
 
-<!-- 					<p:commandButton id="confirm" value="Sim" -->
-<!-- 						oncomplete="confirmation.hide()" -->
-<!-- 						actionListener="#{bibliotecaController.deletar}" -->
-<!-- 						update=":formPanel" /> -->
-<!-- 					<p:commandButton id="decline" value="Não" -->
-<!-- 						onclick="confirmation.hide()" type="button" /> -->
+						<h:outputText value="#{bibliotecaController.biblioteca2.nome}"></h:outputText>
+						<p:dataTable var="lista2" value="#{bibliotecaController.list2}">
 
-<!-- 				</p:confirmDialog> -->
-<!-- 			</h:form> -->
+
+							<p:column headerText="Nome">
+
+								<h:outputText value="#{lista2.nome}" />
+							</p:column>
+							<p:column headerText="Classificação">
+
+								<h:outputText value="#{lista2.classificacaoBiblioteca.nome}" />
+							</p:column>
+							<p:column headerText="Desejada">
+
+								<p:selectBooleanCheckbox
+									value="#{bibliotecaController.desejado}"></p:selectBooleanCheckbox>
+							</p:column>
+							<p:column headerText="Ações">
+								<!-- 								<p:commandLink title="Alterar" update=":Alterar:formAlterar" -->
+								<!-- 									oncomplete="dialogAlterar.show()" immediate="true"> -->
+
+								<!-- 									<p:graphicImage value="/images/editar.png" /> -->
+								<!-- 									<f:setPropertyActionListener -->
+								<!-- 										target="#{bibliotecaController.biblioteca}" value="#{lista2}" /> -->
+								<!-- 								</p:commandLink> -->
+
+								<p:commandLink title="Excluir"
+									action="#{bibliotecaController.deletar}">
+									<p:graphicImage value="/images/excluir.png" />
+									<f:setPropertyActionListener
+										target="#{bibliotecaController.biblioteca}" value="#{lista2}" />
+									<p:confirm header="Confirmação"
+										message="Tem certeza que deseja excluir essa biblioteca?"
+										icon="ui-icon-alert" />
+								</p:commandLink>
+							</p:column>
+						</p:dataTable>
+					</c:if>
+
+
+					<br />
+					<c:if test="#{bibliotecaController.list3.size() > 0}">
+
+						<h:outputText value="#{bibliotecaController.biblioteca3.nome}"></h:outputText>
+						<p:dataTable var="lista3" value="#{bibliotecaController.list3}">
+
+
+							<p:column headerText="Nome">
+
+								<h:outputText value="#{lista3.nome}" />
+							</p:column>
+							<p:column headerText="Classificação">
+
+								<h:outputText value="#{lista3.classificacaoBiblioteca.nome}" />
+							</p:column>
+							<p:column headerText="Desejada">
+
+								<p:selectBooleanCheckbox
+									value="#{bibliotecaController.desejado}"></p:selectBooleanCheckbox>
+							</p:column>
+							<p:column headerText="Ações">
+								<!-- 								<p:commandLink title="Alterar" update=":Alterar:formAlterar" -->
+								<!-- 									oncomplete="dialogAlterar.show()" immediate="true"> -->
+								<!-- 									<p:graphicImage value="/images/editar.png" /> -->
+								<!-- 									<f:setPropertyActionListener -->
+								<!-- 										target="#{bibliotecaController.biblioteca}" value="#{lista3}" /> -->
+								<!-- 								</p:commandLink> -->
+
+								<p:commandLink title="Excluir"
+									action="#{bibliotecaController.deletar}">
+									<p:graphicImage value="/images/excluir.png" />
+									<f:setPropertyActionListener
+										target="#{bibliotecaController.biblioteca}" value="#{lista3}" />
+									<p:confirm header="Confirmação"
+										message="Tem certeza que deseja excluir essa biblioteca?"
+										icon="ui-icon-alert" />
+								</p:commandLink>
+
+								<p:confirmDialog global="true" showEffect="fade"
+									hideEffect="explode">
+									<p:commandButton value="Sim" type="button"
+										styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+									<p:commandButton value="Não" type="button"
+										styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								</p:confirmDialog>
+							</p:column>
+						</p:dataTable>
+					</c:if>
+				</h:form>
+			</p:panel>
+			<p:dialog header="Alterar" widgetVar="dialogAlterar" modal="true"
+				id="Alterar" resizable="false" height="480" width="768">
+				<h:form id="formAlterar">
+					<p:panelGrid id="panelAlterar" columns="3">
+
+						<p:inputText value="#{bibliotecaController.biblioteca.nome}"/>
+
+						<p:selectOneMenu value="#{bibliotecaController.idTipo}">
+							<f:selectItem itemLabel="Selecione o tipo da biblioteca" />
+							<f:selectItems value="#{bibliotecaController.tipoLibraryMap}"></f:selectItems>
+
+						</p:selectOneMenu>
+
+						<p:selectOneMenu value="#{bibliotecaController.idClassificacao}">
+							<f:selectItem itemLabel="Classifique sua biblioteca" />
+							<f:selectItems
+								value="#{bibliotecaController.classificacaoLibraryMap}"></f:selectItems>
+
+						</p:selectOneMenu>
+					</p:panelGrid>
+					<p:commandButton value="Alterar"
+						actionListener="#{bibliotecaController.atualizar}"
+						oncomplete="dialogAlterar.hide()"/>
+				</h:form>
+			</p:dialog>
 
 		</ui:define>
 

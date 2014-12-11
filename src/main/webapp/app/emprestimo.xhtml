@@ -5,55 +5,178 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>MyLibraries Empréstimos</title>
+	<link rel="shortcut icon" href="images/logo.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="css/styleUserRegister.css"></link>
+</h:head>
 <h:body>
 
 	<ui:composition template="../template/common/commonHeader.xhtml">
 
 		<ui:define name="panelBody">
 
-			<h:form>
+			<p:panel id="panelPrincipal">
 
-				<p:growl id="msg" showDetail="true" />
+				<h:form id="formCadastro">
 
-				<!-- Combo box tipo de biblioteca -->
-				<p:outputLabel for="typeLibrarie" value="Tipo biblioteca:" />
-				
-				<p:selectOneMenu 
-					id="typeLibrarie"
-					value="#{emprestimoController.idTypeLibrary}">
-					
-					<p:ajax 
-						listener="#{emprestimoController.onTypeLibraryChange}"
-						update="items" />
-					
-					<f:selectItem 
-						itemLabel="Selecione o tipo" 
-						itemValue=""
-						noSelectionOption="true" />
-					
-					<f:selectItems value="#{emprestimoController.typeLibraryMap}" />
-					
-				</p:selectOneMenu>
+					<p:growl id="msg" showDetail="true" />
 
-				<!-- Combo box bibliotecas -->
-				<p:outputLabel for="items" value="Itens:" />
-				
-				<p:selectOneMenu 
-					id="items" 
-					value="#{emprestimoController.idLibrary}">
-					
-					<f:selectItem 
-						itemLabel="Selecione a biblioteca" 
-						itemValue=""
-						noSelectionOption="true" />
-						
-					<f:selectItems value="#{emprestimoController.libraryMap}" />
-				
-				</p:selectOneMenu>
-				
-				<p:commandButton value="Salvar" update="msg" actionListener="#{emprestimoController.save}" icon="ui-icon-check" />
+					<!-- Combo box tipo de biblioteca -->
+					<!-- <p:outputLabel for="typeLibrarie" value="Tipo biblioteca:" /> -->
 
-			</h:form>
+					<p:selectOneMenu id="typeLibrarie"
+						value="#{emprestimoController.idTypeLibrary}">
+
+						<p:ajax listener="#{emprestimoController.onTypeLibraryChange}"
+							update="items" />
+
+						<f:selectItem itemLabel="Selecione o tipo" itemValue=""
+							noSelectionOption="true" />
+
+						<f:selectItems value="#{emprestimoController.typeLibraryMap}" />
+
+					</p:selectOneMenu>
+
+					<!-- Combo box bibliotecas -->
+					<!--	<p:outputLabel for="items" value="Itens:" /> -->
+
+					<p:selectOneMenu id="items"
+						value="#{emprestimoController.idLibrary}">
+
+						<f:selectItem itemLabel="Selecione a biblioteca" itemValue=""
+							noSelectionOption="true" />
+
+						<f:selectItems value="#{emprestimoController.libraryMap}" />
+
+					</p:selectOneMenu>
+
+					<p:inputText id="destinatario"
+						value="#{emprestimoController.destinatario}"></p:inputText>
+					<p:watermark for="destinatario" value="Para quem irá emprestar?"></p:watermark>
+
+					<p:calendar id="dataEmprestimo" mode="popup"
+						value="#{emprestimoController.dataEmprestimo}"></p:calendar>
+					<p:watermark for="dataEmprestimo" value="Data de emprestimo"></p:watermark>
+
+					<p:inputTextarea id="observacao"
+						value="#{emprestimoController.observacao}"></p:inputTextarea>
+					<p:watermark for="observacao" value="Alguma observação?"></p:watermark>
+
+
+
+					<p:commandButton value="Salvar"
+						action="#{emprestimoController.save}" icon="ui-icon-check" ></p:commandButton>
+				</h:form>
+
+			</p:panel>
+
+			<p:scrollPanel>
+				<h:form id="formPanel">
+					<br />
+					<h:outputText value="Livros Emprestados"></h:outputText>
+					<p:dataTable var="listaEmprestimoL"
+						value="#{emprestimoController.listaEmprestimoL}">
+						<p:column headerText="Nome biblioteca">
+							<h:outputText value="#{listaEmprestimoL.biblioteca.nome}" />
+						</p:column>
+						<p:column headerText="Para quem?">
+							<h:outputText value="#{listaEmprestimoL.destinatario}" />
+						</p:column>
+						<p:column headerText="Data emprestimo">
+							<h:outputText value="#{listaEmprestimoL.dataEmprestimo}" />
+						</p:column>
+						<p:column headerText="Açoes">
+							<p:commandLink title="Excluir"
+									action="#{emprestimoController.deletar}">
+									<p:graphicImage value="/images/excluir.png" />
+									<f:setPropertyActionListener
+										target="#{emprestimoController.emprestimo}" value="#{listaEmprestimoL}" />
+									<p:confirm header="Confirmação"
+										message="Tem certeza que deseja excluir esse emprestimo?"
+										icon="ui-icon-alert" />
+								</p:commandLink>
+
+								<p:confirmDialog global="true" showEffect="fade"
+									hideEffect="explode">
+									<p:commandButton value="Sim" type="button"
+										styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+									<p:commandButton value="Não" type="button"
+										styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								</p:confirmDialog>
+						</p:column>
+					</p:dataTable>
+					
+					<br />
+					<h:outputText value="Musicas Emprestadas"></h:outputText>
+					<p:dataTable var="listaEmprestimoM"
+						value="#{emprestimoController.listaEmprestimoM}">
+						<p:column headerText="Nome biblioteca">
+							<h:outputText value="#{listaEmprestimoM.biblioteca.nome}" />
+						</p:column>
+						<p:column headerText="Para quem?">
+							<h:outputText value="#{listaEmprestimoM.destinatario}" />
+						</p:column>
+						<p:column headerText="Data emprestimo">
+							<h:outputText value="#{listaEmprestimoM.dataEmprestimo}" />
+						</p:column>
+						<p:column headerText="Açoes">
+							<p:commandLink title="Excluir"
+									action="#{emprestimoController.deletar}">
+									<p:graphicImage value="/images/excluir.png" />
+									<f:setPropertyActionListener
+										target="#{emprestimoController.emprestimo}" value="#{listaEmprestimoM}" />
+									<p:confirm header="Confirmação"
+										message="Tem certeza que deseja excluir esse emprestimo?"
+										icon="ui-icon-alert" />
+								</p:commandLink>
+
+								<p:confirmDialog global="true" showEffect="fade"
+									hideEffect="explode">
+									<p:commandButton value="Sim" type="button"
+										styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+									<p:commandButton value="Não" type="button"
+										styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								</p:confirmDialog>
+						</p:column>
+					</p:dataTable>
+
+					<br />
+					<h:outputText value="Videos Emprestados"></h:outputText>
+					<p:dataTable var="listaEmprestimoV"
+						value="#{emprestimoController.listaEmprestimoV}">
+						<p:column headerText="Nome biblioteca">
+							<h:outputText value="#{listaEmprestimoV.biblioteca.nome}" />
+						</p:column>
+						<p:column headerText="Para quem?">
+							<h:outputText value="#{listaEmprestimoV.destinatario}" />
+						</p:column>
+						<p:column headerText="Data emprestimo">
+							<h:outputText value="#{listaEmprestimoV.dataEmprestimo}" />
+						</p:column>
+						<p:column headerText="Açoes">
+							<p:commandLink title="Excluir"
+									action="#{emprestimoController.deletar}">
+									<p:graphicImage value="/images/excluir.png" />
+									<f:setPropertyActionListener
+										target="#{emprestimoController.emprestimo}" value="#{listaEmprestimoV}" />
+									<p:confirm header="Confirmação"
+										message="Tem certeza que deseja excluir esse emprestimo?"
+										icon="ui-icon-alert" />
+								</p:commandLink>
+
+								<p:confirmDialog global="true" showEffect="fade"
+									hideEffect="explode">
+									<p:commandButton value="Sim" type="button"
+										styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+									<p:commandButton value="Não" type="button"
+										styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								</p:confirmDialog>
+						</p:column>
+					</p:dataTable>
+				</h:form>
+			</p:scrollPanel>
 
 		</ui:define>
 
