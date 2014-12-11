@@ -125,11 +125,18 @@ public class EmprestimoController implements Serializable {
 		WebUtils.getInstance()
 				.redirectPage("/mylibraries/app/emprestimo.xhtml");
 	}
+	
+	public void encerrar(){
+		emprestimo.setAtivo(false);
+		emprestimo.setDataEncerramento(new Date());
+		emprestimoDAO.update(emprestimo);
+	}//emp = emprestimoDAO.getAll();
 
 	public void listasDeEmprestimos() {
 		List<Emprestimo> emp = new ArrayList<Emprestimo>();
-		emp = emprestimoDAO.getAll();
 		Long idUser = WebUtils.getInstance().getIdUserSession();
+		Usuario usuario = usuarioDAO.getById(idUser);
+		emp = emprestimoDAO.ListByUser(usuario);
 		for (Emprestimo emprestimo : emp) {
 			if (emprestimo.getUsuario().getUsuarioId() == idUser) {
 				if (emprestimo.getBiblioteca().getTipoBiblioteca().getTipoId() == 1)
