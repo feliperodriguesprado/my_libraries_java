@@ -1,0 +1,32 @@
+.panel1 {
+	background-color: #F5F5F5;
+	float: left;
+	margin: 10px auto;
+	margin-left: 20px;
+	margin-right: 5px;
+	margin-top: 30px;
+	padding: 5px;
+	width: 46%;
+	text-align: center;
+}
+
+.panel2 {
+	background-color: #F5F5F5;
+	float: right;
+	margin: 10px auto;
+	margin-top: 30px;
+	margin-right: 20px;
+	padding: 5px;
+	width: 46%;
+	text-align: center;
+}
+
+.dataTable {
+	text-align: left;
+}
+
+.panelData {
+	background-color: #F5F5F5;
+	margin-bottom: 10px;
+	border: none;
+}

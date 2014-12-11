@@ -4,7 +4,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" >
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>MyLibraries</title>
@@ -15,11 +16,163 @@
 
 		<ui:define name="panelBody">
 
-			<p:panel id="panelPrincipal">
 
-				<h:outputText value="MyLibraries - pagina principal"></h:outputText>
+		<!-- Painel de ultimas bibliotecas cadastradas -->
 
-			</p:panel>
+		<p:panel styleClass="panel1" header="Últimas bibliotecas cadastradas">
+		
+			
+			<!-- Painel de Livros -->
+			
+			<c:if test="#{mainController.bibliotecaLivroList.size() > 0 }">
+		
+				<p:panel styleClass="panelData">
+				
+					<p:outputLabel value="Livros" styleClass="title"></p:outputLabel>
+				
+					<p:dataTable styleClass="dataTable" var="livro" value="#{mainController.bibliotecaLivroList}">
+						<p:column headerText="Nome">
+							<h:outputText value="#{livro.nome}" />
+						</p:column>
+
+						<p:column headerText="Classificação">
+							<h:outputText value="#{livro.classificacaoBiblioteca.nome}" />
+						</p:column>
+
+					</p:dataTable>
+
+				</p:panel>
+		
+			</c:if>
+			
+			
+			
+			<!-- Painel de Musicas -->
+			
+			<c:if test="#{mainController.bibliotecaMusicaList.size() > 0 }">
+		
+				<p:panel styleClass="panelData" >
+				
+					<p:outputLabel value="Músicas" styleClass="title"></p:outputLabel>
+				
+					<p:dataTable styleClass="dataTable" var="musica" value="#{mainController.bibliotecaMusicaList}">
+						<p:column headerText="Nome">
+							<h:outputText value="#{musica.nome}" />
+						</p:column>
+
+						<p:column headerText="Classificação">
+							<h:outputText value="#{musica.classificacaoBiblioteca.nome}" />
+						</p:column>
+
+					</p:dataTable>
+
+				</p:panel>
+		
+			</c:if>
+			
+			
+			<!-- Painel de Videos -->
+			
+			<c:if test="#{mainController.bibliotecaVideoList.size() > 0 }">
+		
+				<p:panel styleClass="panelData">
+				
+					<p:outputLabel value="Vídeos" styleClass="title"></p:outputLabel>
+				
+					<p:dataTable styleClass="dataTable" var="video" value="#{mainController.bibliotecaVideoList}">
+						<p:column headerText="Nome">
+							<h:outputText value="#{video.nome}" />
+						</p:column>
+
+						<p:column headerText="Classificação">
+							<h:outputText value="#{video.classificacaoBiblioteca.nome}" />
+						</p:column>
+
+					</p:dataTable>
+
+				</p:panel>
+		
+			</c:if>
+			
+		</p:panel>
+		
+		
+		<!-- Painel de bibliotecas desejadas -->
+		
+		<p:panel styleClass="panel2" header="Bibliotecas desejadas">
+		
+			<!-- Painel de Livros desejados -->
+		
+			<c:if test="#{mainController.bibliotecaLivroDesList.size() > 0 }">
+				
+				<p:panel styleClass="panelData">
+				
+					<p:outputLabel value="Livros" styleClass="title"></p:outputLabel>
+				
+					<p:dataTable styleClass="dataTable" var="livroDes" value="#{mainController.bibliotecaLivroDesList}">
+						<p:column headerText="Nome">
+							<h:outputText value="#{livroDes.nome}" />
+						</p:column>
+
+						<p:column headerText="Classificação">
+							<h:outputText value="#{livroDes.classificacaoBiblioteca.nome}" />
+						</p:column>
+
+					</p:dataTable>
+				
+				</p:panel>
+				
+			</c:if>
+			
+			
+			<!-- Painel de Musicas desejados -->
+			
+			<c:if test="#{mainController.bibliotecaMusicaDesList.size() > 0 }">
+				
+				<p:panel styleClass="panelData">
+				
+					<p:outputLabel value="Músicas" styleClass="title"></p:outputLabel>
+				
+					<p:dataTable styleClass="dataTable" var="musicaDes" value="#{mainController.bibliotecaMusicaDesList}">
+						<p:column headerText="Nome">
+							<h:outputText value="#{musicaDes.nome}" />
+						</p:column>
+
+						<p:column headerText="Classificação">
+							<h:outputText value="#{musicaDes.classificacaoBiblioteca.nome}" />
+						</p:column>
+
+					</p:dataTable>
+				
+				</p:panel>
+				
+			</c:if>
+			
+			<!-- Painel de Videos desejados -->
+			
+			<c:if test="#{mainController.bibliotecaVideoDesList.size() > 0 }">
+				
+				<p:panel styleClass="panelData">
+				
+					<p:outputLabel value="Vídeos" styleClass="title"></p:outputLabel>
+				
+					<p:dataTable styleClass="dataTable" var="videoDes" value="#{mainController.bibliotecaVideoDesList}">
+						<p:column headerText="Nome">
+							<h:outputText value="#{videoDes.nome}" />
+						</p:column>
+
+						<p:column headerText="Classificação">
+							<h:outputText value="#{videoDes.classificacaoBiblioteca.nome}" />
+						</p:column>
+
+					</p:dataTable>
+				
+				</p:panel>
+				
+			</c:if>
+				
+		</p:panel>
+
 		</ui:define>
 
 	</ui:composition>
