@@ -67,7 +67,7 @@
 
 
 					<p:commandButton value="Salvar"
-						action="#{emprestimoController.save}" icon="ui-icon-check"></p:commandButton>
+						action="#{emprestimoController.save}" icon="ui-icon-check" ></p:commandButton>
 				</h:form>
 
 			</p:panel>
@@ -88,7 +88,23 @@
 							<h:outputText value="#{listaEmprestimoL.dataEmprestimo}" />
 						</p:column>
 						<p:column headerText="Açoes">
-							<h:outputText />
+							<p:commandLink title="Excluir"
+									action="#{emprestimoController.deletar}">
+									<p:graphicImage value="/images/excluir.png" />
+									<f:setPropertyActionListener
+										target="#{emprestimoController.emprestimo}" value="#{listaEmprestimoL}" />
+									<p:confirm header="Confirmação"
+										message="Tem certeza que deseja excluir esse emprestimo?"
+										icon="ui-icon-alert" />
+								</p:commandLink>
+
+								<p:confirmDialog global="true" showEffect="fade"
+									hideEffect="explode">
+									<p:commandButton value="Sim" type="button"
+										styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+									<p:commandButton value="Não" type="button"
+										styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								</p:confirmDialog>
 						</p:column>
 					</p:dataTable>
 					
@@ -106,7 +122,23 @@
 							<h:outputText value="#{listaEmprestimoM.dataEmprestimo}" />
 						</p:column>
 						<p:column headerText="Açoes">
-							<h:outputText />
+							<p:commandLink title="Excluir"
+									action="#{emprestimoController.deletar}">
+									<p:graphicImage value="/images/excluir.png" />
+									<f:setPropertyActionListener
+										target="#{emprestimoController.emprestimo}" value="#{listaEmprestimoM}" />
+									<p:confirm header="Confirmação"
+										message="Tem certeza que deseja excluir esse emprestimo?"
+										icon="ui-icon-alert" />
+								</p:commandLink>
+
+								<p:confirmDialog global="true" showEffect="fade"
+									hideEffect="explode">
+									<p:commandButton value="Sim" type="button"
+										styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+									<p:commandButton value="Não" type="button"
+										styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								</p:confirmDialog>
 						</p:column>
 					</p:dataTable>
 
@@ -124,7 +156,23 @@
 							<h:outputText value="#{listaEmprestimoV.dataEmprestimo}" />
 						</p:column>
 						<p:column headerText="Açoes">
-							<h:outputText />
+							<p:commandLink title="Excluir"
+									action="#{emprestimoController.deletar}">
+									<p:graphicImage value="/images/excluir.png" />
+									<f:setPropertyActionListener
+										target="#{emprestimoController.emprestimo}" value="#{listaEmprestimoV}" />
+									<p:confirm header="Confirmação"
+										message="Tem certeza que deseja excluir esse emprestimo?"
+										icon="ui-icon-alert" />
+								</p:commandLink>
+
+								<p:confirmDialog global="true" showEffect="fade"
+									hideEffect="explode">
+									<p:commandButton value="Sim" type="button"
+										styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+									<p:commandButton value="Não" type="button"
+										styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								</p:confirmDialog>
 						</p:column>
 					</p:dataTable>
 				</h:form>

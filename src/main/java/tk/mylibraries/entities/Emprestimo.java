@@ -2,6 +2,7 @@ package tk.mylibraries.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -39,6 +40,17 @@ public class Emprestimo implements Serializable {
 	private String observacao;
 	@Column(name = "ativo", nullable = true)
 	private Boolean ativo;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "usuarioid")
+	private Usuario usuario;
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 	public Long getEmprestimoId() {
 		return emprestimoId;

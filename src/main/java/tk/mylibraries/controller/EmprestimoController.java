@@ -14,9 +14,11 @@ import javax.faces.bean.ViewScoped;
 import tk.mylibraries.dao.BibliotecaDAO;
 import tk.mylibraries.dao.EmprestimoDAO;
 import tk.mylibraries.dao.TipoBibliotecaDAO;
+import tk.mylibraries.dao.UsuarioDAO;
 import tk.mylibraries.entities.Biblioteca;
 import tk.mylibraries.entities.Emprestimo;
 import tk.mylibraries.entities.TipoBiblioteca;
+import tk.mylibraries.entities.Usuario;
 import tk.mylibraries.orm.HibernateUtil;
 import tk.mylibraries.utils.Messages;
 import tk.mylibraries.utils.WebUtils;
@@ -26,6 +28,7 @@ import tk.mylibraries.utils.WebUtils;
 public class EmprestimoController implements Serializable {
 
 	private Emprestimo emprestimo;
+
 	private TipoBiblioteca tipoBiblioteca;
 	private Biblioteca biblioteca;
 	private BibliotecaDAO bibliotecaDAO;
@@ -40,7 +43,8 @@ public class EmprestimoController implements Serializable {
 	private Map<String, Long> libraryMap;
 	private String idTypeLibrary;
 	private String idLibrary;
-	
+	private UsuarioDAO usuarioDAO;
+
 	private List<Emprestimo> listaEmprestimoL;
 	private List<Emprestimo> listaEmprestimoM;
 	private List<Emprestimo> listaEmprestimoV;
@@ -93,6 +97,14 @@ public class EmprestimoController implements Serializable {
 		this.observacao = observacao;
 	}
 
+	public Emprestimo getEmprestimo() {
+		return emprestimo;
+	}
+
+	public void setEmprestimo(Emprestimo emprestimo) {
+		this.emprestimo = emprestimo;
+	}
+
 	public EmprestimoController() {
 		emprestimo = new Emprestimo();
 		tipoBibliotecaDAO = new TipoBibliotecaDAO(
@@ -104,25 +116,40 @@ public class EmprestimoController implements Serializable {
 		listaEmprestimoL = new ArrayList<Emprestimo>();
 		listaEmprestimoM = new ArrayList<Emprestimo>();
 		listaEmprestimoV = new ArrayList<Emprestimo>();
+		usuarioDAO = new UsuarioDAO(HibernateUtil.getEntityManager());
 		listasDeEmprestimos();
 	}
-	
-	public void listasDeEmprestimos(){
+
+	public void deletar() {
+		emprestimoDAO.delete(emprestimo);
+		WebUtils.getInstance()
+				.redirectPage("/mylibraries/app/emprestimo.xhtml");
+	}
+
+	public void listasDeEmprestimos() {
 		List<Emprestimo> emp = new ArrayList<Emprestimo>();
 		emp = emprestimoDAO.getAll();
-		for(Emprestimo emprestimo: emp){
-			if(emprestimo.getBiblioteca().getBibliotecaId() == 1)
-				listaEmprestimoL.add(emprestimo);
-			else{
-				if(emprestimo.getBiblioteca().getBibliotecaId() == 2)
+		Long idUser = WebUtils.getInstance().getIdUserSession();
+		for (Emprestimo emprestimo : emp) {
+			if (emprestimo.getUsuario().getUsuarioId() == idUser) {
+				if (emprestimo.getBiblioteca().getTipoBiblioteca().getTipoId() == 1)
 					listaEmprestimoV.add(emprestimo);
-				else{
-					listaEmprestimoM.add(emprestimo);
+				else {
+					if (emprestimo.getBiblioteca().getTipoBiblioteca()
+							.getTipoId() == 2)
+						listaEmprestimoM.add(emprestimo);
+					else {
+						listaEmprestimoL.add(emprestimo);
+					}
 				}
-			}			
-			//System.out.println(emprestimo.getDestinatario());
+			}
+
 		}
 	}
+
+	// Usuario usuario = usuarioDAO.getById(WebUtils.getInstance()
+	// .getIdUserSession());
+	// emp = emprestimoDAO.ListByUser(usuario);
 
 	/**
 	 * Metodo que popula o combo box do tipo de biblioteca
@@ -194,6 +221,9 @@ public class EmprestimoController implements Serializable {
 		emprestimo.setDestinatario(getDestinatario());
 		emprestimo.setObservacao(getObservacao());
 		emprestimo.setAtivo(true);
+		Usuario user = usuarioDAO.getById(WebUtils.getInstance()
+				.getIdUserSession());
+		emprestimo.setUsuario(user);
 		emprestimoDAO.save(emprestimo);
 	}
 
