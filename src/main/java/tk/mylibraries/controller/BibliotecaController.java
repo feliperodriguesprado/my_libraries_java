@@ -34,6 +34,10 @@ public class BibliotecaController {
 	private List<Biblioteca> list1, list2, list3;
 	private Biblioteca biblioteca1, biblioteca2, biblioteca3;
 	private EntityManager entityManager;
+	
+	private String aux;
+	
+	private long idBiblioteca = 0l;
 
 	private String idTipo;
 	private Map<String, Long> tipoLibraryMap;
@@ -157,12 +161,29 @@ public class BibliotecaController {
 	public void setIdTipo(String idTipo) {
 		this.idTipo = idTipo;
 	}
+	
 
 	public void atualizar() {
+		
 		usuarioTO = usuarioDAO.getById(WebUtils.getInstance()
 				.getIdUserSession());
 
 		biblioteca.setUsuario(usuarioTO);
+		
+		List<Biblioteca> bibliotecas = new ArrayList<Biblioteca>();
+		bibliotecas = bibliotecaDAO.ListByUser(usuarioTO);
+		
+		long idBiblioteca = 0l;
+		
+		for (Biblioteca biblioteca2 : bibliotecas) {
+			if(biblioteca2.getNome() == biblioteca.getNome()){
+				idBiblioteca = biblioteca2.getBibliotecaId();
+				break;
+			}
+		}
+		
+		biblioteca.setBibliotecaId(idBiblioteca);
+		biblioteca.setNome(aux);
 
 		tipoBibliotecaTO = tipoBibliotecaDAO.getById(Long.parseLong(idTipo));
 		biblioteca.setTipoBiblioteca(tipoBibliotecaTO);
@@ -170,8 +191,13 @@ public class BibliotecaController {
 		classificacaoBibliotecaTO = classificacaoBibliotecaDAO.getById(Long
 				.parseLong(idClassificacao));
 		biblioteca.setClassificacaoBiblioteca(classificacaoBibliotecaTO);
+		//biblioteca.setBibliotecaId(78l);
 
 		bibliotecaDAO.update(biblioteca);
+		biblioteca = new Biblioteca();
+		
+		WebUtils.getInstance().redirectPage(
+				"/MyLibraries_JavaEE7/app/biblioteca.xhtml");
 		
 	}
 
@@ -269,5 +295,24 @@ public class BibliotecaController {
 	public void setBiblioteca3(Biblioteca biblioteca3) {
 		this.biblioteca3 = biblioteca3;
 	}
+
+	public long getIdBiblioteca() {
+		return idBiblioteca;
+	}
+
+	public void setIdBiblioteca(long idBiblioteca) {
+		this.idBiblioteca = idBiblioteca;
+	}
+
+	public String getAux() {
+		aux= biblioteca.getNome();
+		return aux;
+	}
+
+	public void setAux(String aux) {
+		this.aux = aux;
+	}
+	
+	
 
 }

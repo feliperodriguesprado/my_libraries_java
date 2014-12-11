@@ -23,13 +23,13 @@ public class TipoBibliotecaController {
 		if (tipoBibliotecaDAO.getAll().size() < 3) {
 
 			List<TipoBiblioteca> tipos = new ArrayList<TipoBiblioteca>();
-			biblioteca.setNome("Vídeos");
+			biblioteca.setNome("Livros");
 			tipos.add(biblioteca);
 			biblioteca = new TipoBiblioteca();
 			biblioteca.setNome("Músicas");
 			tipos.add(biblioteca);
 			biblioteca = new TipoBiblioteca();
-			biblioteca.setNome("Livros");
+			biblioteca.setNome("Vídeos");
 			tipos.add(biblioteca);
 			for (TipoBiblioteca tipoBiblioteca : tipos) {
 				tipoBibliotecaDAO.save(tipoBiblioteca);
