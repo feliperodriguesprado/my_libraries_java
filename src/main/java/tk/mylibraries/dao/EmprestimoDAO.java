@@ -22,7 +22,7 @@ public class EmprestimoDAO extends GenericDAO<Emprestimo, Long> {
 	public List<Emprestimo> ListByUser(Usuario usuario) {
 		List<Emprestimo> listAll = new ArrayList<Emprestimo>();
 		try {
-			String query = "from emprestimo e" + " where e.usuarioid = :usuario and e.ativo=true ";
+			String query = "from Emprestimo e where e.usuario = :usuario and e.ativo=true ";
 			Query q = em.createQuery(query);
 			q.setParameter("usuario", usuario);
 			Object result = q.getResultList();

@@ -63,8 +63,9 @@ CREATE SEQUENCE public.emprestimo_emprestimoid_seq;
 CREATE TABLE public.emprestimo (
                 emprestimoid INTEGER NOT NULL DEFAULT nextval('public.emprestimo_emprestimoid_seq'),
                 bibliotecaid INTEGER NOT NULL,
+                usuarioid INTEGER NOT NULL,
                 data_emprestimo DATE NOT NULL,
-                data_encerramento DATE NOT NULL,
+                data_encerramento DATE,
                 destinatario VARCHAR(100) NOT NULL,
                 observacao VARCHAR(200) NOT NULL,
                 ativo BOOLEAN NOT NULL,
@@ -99,6 +100,13 @@ NOT DEFERRABLE;
 ALTER TABLE public.emprestimo ADD CONSTRAINT biblioteca_emprestimo_fk
 FOREIGN KEY (bibliotecaid)
 REFERENCES public.biblioteca (bibliotecaid)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.emprestimo ADD CONSTRAINT biblioteca_usuario_fk
+FOREIGN KEY (usuarioid)
+REFERENCES public.usuario (usuarioid)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;

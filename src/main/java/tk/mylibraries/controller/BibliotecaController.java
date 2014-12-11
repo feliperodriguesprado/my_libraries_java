@@ -100,8 +100,7 @@ public class BibliotecaController {
 		bibliotecaDAO.save(biblioteca);
 		biblioteca = new Biblioteca();
 		
-		WebUtils.getInstance().redirectPage(
-				"/MyLibraries_JavaEE7/app/biblioteca.xhtml");
+		WebUtils.getInstance().redirectPage("biblioteca.xhtml");
 
 	}
 

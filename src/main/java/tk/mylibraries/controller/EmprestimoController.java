@@ -122,14 +122,14 @@ public class EmprestimoController implements Serializable {
 
 	public void deletar() {
 		emprestimoDAO.delete(emprestimo);
-		WebUtils.getInstance()
-				.redirectPage("/mylibraries/app/emprestimo.xhtml");
+		WebUtils.getInstance().redirectPage("emprestimo.xhtml");
 	}
 	
 	public void encerrar(){
 		emprestimo.setAtivo(false);
 		emprestimo.setDataEncerramento(new Date());
 		emprestimoDAO.update(emprestimo);
+		WebUtils.getInstance().redirectPage("emprestimo.xhtml");
 	}//emp = emprestimoDAO.getAll();
 
 	public void listasDeEmprestimos() {
@@ -232,6 +232,7 @@ public class EmprestimoController implements Serializable {
 				.getIdUserSession());
 		emprestimo.setUsuario(user);
 		emprestimoDAO.save(emprestimo);
+		WebUtils.getInstance().redirectPage("emprestimo.xhtml");
 	}
 
 	public Map<String, Long> getTypeLibraryMap() {

@@ -19,7 +19,7 @@
 		<ui:define name="panelBody">
 			<p:panelGrid id="panelAll" columns="2">
 
-				<p:panel id="panelPrincipal">
+				<p:panel id="panelPrincipal" >
 
 					<h:form id="formCadastro">
 						<p:messages autoUpdate="true" />
@@ -58,6 +58,7 @@
 					</h:form>
 
 				</p:panel>
+				
 				<p:panel>
 
 					<h:outputText value="Bibliotecas desejadas" />
@@ -127,7 +128,7 @@
 								<p:column headerText="Desejada">
 
 									<p:selectBooleanCheckbox
-										value="#{bibliotecaController.desejado}"></p:selectBooleanCheckbox>
+										value="#{lista2.desejado}" disabled="true"/>
 								</p:column>
 								<p:column headerText="Ações">
 									<p:commandLink title="Alterar"
@@ -170,7 +171,7 @@
 								<p:column headerText="Desejada">
 
 									<p:selectBooleanCheckbox
-										value="#{bibliotecaController.desejado}"></p:selectBooleanCheckbox>
+										value="#{lista3.desejado}" disabled="true"/>
 								</p:column>
 								<p:column headerText="Ações">
 									<p:commandLink title="Alterar"
